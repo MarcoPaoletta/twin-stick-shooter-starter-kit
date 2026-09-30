@@ -5,7 +5,8 @@ var _active_tree
 
 
 func _enter_tree() -> void:
-	EngineDebugger.register_message_capture("beehave", _on_debug_message)
+	if EngineDebugger.is_active():
+		EngineDebugger.register_message_capture("beehave", _on_debug_message)
 
 
 func _on_debug_message(message: String, data: Array) -> bool:

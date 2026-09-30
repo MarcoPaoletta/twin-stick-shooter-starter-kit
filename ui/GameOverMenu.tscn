@@ -5,7 +5,6 @@
 
 [sub_resource type="GDScript" id="GDScript_nf6jy"]
 script/source = "extends Control
-class_name GameOverMenu
 
 signal restart_pressed
 signal quit_pressed
