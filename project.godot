@@ -24,8 +24,8 @@ config/icon="res://project_icon.png"
 
 DebugStats="*res://tools/debugging/DebugStats.tscn"
 DebugOverlay="*res://tools/debugging/DebugOverlay.tscn"
-BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
-BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
+BeehaveGlobalMetrics="*uid://dt67a6ly328mj"
+BeehaveGlobalDebugger="*uid://7wn3rhjjno4j"
 
 [display]
 
@@ -233,3 +233,5 @@ vram_compression/import_etc=true
 
 project/editorState=[]
 project/breakpoints={}
+project/shaderEditorState=[]
+project/disabled_breakpoints={}
