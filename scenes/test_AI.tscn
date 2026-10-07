@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://cjklvg8pt4duv"]
+[gd_scene format=3 uid="uid://cjklvg8pt4duv"]
 
 [ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/PlayerEntity.tscn" id="1_6jodu"]
-[ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_txk74"]
+[ext_resource type="Script" uid="uid://ijrpu1bsamse" path="res://scenes/level_manager.gd" id="1_txk74"]
 [ext_resource type="PackedScene" uid="uid://bd5lrudlpxbay" path="res://ui/GameOverMenu.tscn" id="2_kmmi5"]
 [ext_resource type="MeshLibrary" uid="uid://1r1ria7fpq17" path="res://kits/mesh_lib3.tres" id="2_rxava"]
 [ext_resource type="Environment" uid="uid://dtrxire26wyng" path="res://scenes/level2/level2_env.tres" id="3_yd4xj"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://digne67jlks1d" path="res://assets/prototype_bits/Workbench_Decorated.gltf" id="14_wcrvg"]
 [ext_resource type="PackedScene" uid="uid://d4ewiiealjeoy" path="res://assets/prototype_bits/Dummy_Base.gltf" id="15_5adn2"]
 [ext_resource type="PackedScene" uid="uid://cvasin4b5w0ll" path="res://assets/prototype_bits/Door_B.gltf" id="15_bvvud"]
+[ext_resource type="PackedScene" path="res://enemies/melee/minion/EnemyRusher.tscn" id="16_nh8n4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_2ocdk"]
 vertices = PackedVector3Array(-15, 1, -15, -15, 1, 11, 15, 1, 11, 15, 1, -15)
@@ -24,15 +25,15 @@ agent_radius = 1.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_h5njp"]
 size = Vector2(32, 28)
 
-[node name="TestAI" type="Node3D"]
+[node name="TestAI" type="Node3D" unique_id=826084531]
 script = ExtResource("1_txk74")
 
-[node name="GameOverMenu" parent="." instance=ExtResource("2_kmmi5")]
+[node name="GameOverMenu" parent="." unique_id=1955573450 instance=ExtResource("2_kmmi5")]
 
-[node name="PlayerEntity" parent="." instance=ExtResource("1_6jodu")]
+[node name="PlayerEntity" parent="." unique_id=469679146 instance=ExtResource("1_6jodu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.515, 0.544966, 6.06295)
 
-[node name="GridMap" type="GridMap" parent="."]
+[node name="GridMap" type="GridMap" parent="." unique_id=423185522]
 mesh_library = ExtResource("2_rxava")
 cell_size = Vector3(4, 4, 4)
 cell_center_y = false
@@ -41,10 +42,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1510293640]
 environment = ExtResource("3_yd4xj")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1916588848]
 transform = Transform3D(0.138435, 0.820941, -0.553978, -0.35771, 0.56305, 0.744996, 0.923515, 0.0950299, 0.371605, 0, 26.3786, -5.7794)
 layers = 2
 light_color = Color(0.992157, 0.917647, 0.698039, 1)
@@ -56,7 +57,7 @@ directional_shadow_split_2 = 0.343
 directional_shadow_split_3 = 0.566
 directional_shadow_blend_splits = true
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1258913252]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 8.74228e-08, 4.37114e-08, -1, 1, -4.37114e-08, 8.74228e-08, 0, 13.9098, -17.1364)
 layers = 2
 light_color = Color(0.303129, 0.18483, 0.0558749, 1)
@@ -67,82 +68,88 @@ shadow_bias = 0.03
 shadow_blur = 0.0
 directional_shadow_mode = 0
 
-[node name="Enemy_Minion" parent="." instance=ExtResource("4_q1glw")]
+[node name="Enemy_Minion" parent="." unique_id=706525517 instance=ExtResource("4_q1glw")]
 transform = Transform3D(0.678352, 0, -0.734737, 0, 1, 0, 0.734737, 0, 0.678352, -10.3302, 0.5, -11.0347)
 
-[node name="Enemy_Minion2" parent="." instance=ExtResource("4_q1glw")]
+[node name="Enemy_Minion2" parent="." unique_id=1390181961 instance=ExtResource("4_q1glw")]
 transform = Transform3D(0.794393, 0, 0.607404, 0, 1, 0, -0.607404, 0, 0.794393, -2.43768, 0.5, -11.0347)
 
-[node name="Enemy_Minion3" parent="." instance=ExtResource("4_q1glw")]
+[node name="Enemy_Minion3" parent="." unique_id=1677925570 instance=ExtResource("4_q1glw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2547, 0.500001, -4.15311)
 
-[node name="Enemy_Minion4" parent="." instance=ExtResource("4_q1glw")]
+[node name="Enemy_Minion4" parent="." unique_id=533801042 instance=ExtResource("4_q1glw")]
 transform = Transform3D(0.831091, 0, -0.556136, 0, 1, 0, 0.556136, 0, 0.831091, 13.9293, 0.500001, -13.5811)
 
-[node name="Enemy_Minion5" parent="." instance=ExtResource("4_q1glw")]
+[node name="Enemy_Minion5" parent="." unique_id=1837819323 instance=ExtResource("4_q1glw")]
 transform = Transform3D(-0.404822, 0, 0.914395, 0, 1, 0, -0.914395, 0, -0.404822, -11.9394, 0.500001, 6.64907)
 
-[node name="Enemy_Minion6" parent="." instance=ExtResource("4_q1glw")]
+[node name="Enemy_Minion6" parent="." unique_id=1935659330 instance=ExtResource("4_q1glw")]
 transform = Transform3D(-0.88605, 0, -0.46359, 0, 1, 0, 0.46359, 0, -0.88605, -7.25304, 0.500001, 6.64907)
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1818988574]
 navigation_mesh = SubResource("NavigationMesh_2ocdk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=302018826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
 visible = false
 mesh = SubResource("PlaneMesh_h5njp")
 
-[node name="Locker_Decorated2" parent="." instance=ExtResource("7_ifwf2")]
+[node name="Locker_Decorated2" parent="." unique_id=1684928391 instance=ExtResource("7_ifwf2")]
 transform = Transform3D(-0.938974, 0, -0.343987, 0, 1, 0, 0.343987, 0, -0.938974, 13.1124, 0.499998, 9.65242)
 
-[node name="Pallet_Small_Decorated_B2" parent="." instance=ExtResource("9_c1hp4")]
+[node name="Pallet_Small_Decorated_B2" parent="." unique_id=612170906 instance=ExtResource("9_c1hp4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.83132, 0.500002, -13.4174)
 
-[node name="Pallet_Small_Decorated_A2" parent="." instance=ExtResource("10_a3bt3")]
+[node name="Pallet_Small_Decorated_A2" parent="." unique_id=358845527 instance=ExtResource("10_a3bt3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.10941, 0.5, -13.592)
 
-[node name="table_medium_Decorated2" parent="." instance=ExtResource("11_qlfyb")]
+[node name="table_medium_Decorated2" parent="." unique_id=1792352921 instance=ExtResource("11_qlfyb")]
 transform = Transform3D(0.941741, 0, -0.336339, 0, 1, 0, 0.336339, 0, 0.941741, 7.90885, 0.500002, -11.5121)
 
-[node name="Weaponrack_Decorated" parent="." instance=ExtResource("12_kuaxq")]
+[node name="Weaponrack_Decorated" parent="." unique_id=596370814 instance=ExtResource("12_kuaxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.89139, 0.5, -15.236)
 
-[node name="Workbench" parent="." instance=ExtResource("13_5j8m0")]
+[node name="Workbench" parent="." unique_id=1229590837 instance=ExtResource("13_5j8m0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4623, 0.5, 7.71874)
 
-[node name="Workbench_Decorated" parent="." instance=ExtResource("14_wcrvg")]
+[node name="Workbench_Decorated" parent="." unique_id=1066613531 instance=ExtResource("14_wcrvg")]
 transform = Transform3D(-0.162121, 0, -0.986771, 0, 1, 0, 0.986771, 0, -0.162121, 13.7048, 0.5, 5.01438)
 
-[node name="Dummy_Base2" parent="." instance=ExtResource("15_5adn2")]
+[node name="Dummy_Base2" parent="." unique_id=724539197 instance=ExtResource("15_5adn2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4323, 0.499998, -14.3371)
 
-[node name="Locker_Decorated3" parent="." instance=ExtResource("7_ifwf2")]
+[node name="Locker_Decorated3" parent="." unique_id=645008635 instance=ExtResource("7_ifwf2")]
 transform = Transform3D(0.842828, 0, 0.538182, 0, 1, 0, -0.538182, 0, 0.842828, -14.2613, 0.5, -12.4936)
 
-[node name="Pallet_Small_Decorated_A3" parent="." instance=ExtResource("10_a3bt3")]
+[node name="Pallet_Small_Decorated_A3" parent="." unique_id=1352913600 instance=ExtResource("10_a3bt3")]
 transform = Transform3D(0.995316, 0, -0.0966796, 0, 1, 0, 0.0966796, 0, 0.995316, -12.1469, 0.5, -14.2773)
 
-[node name="Pallet_Small_Decorated_B3" parent="." instance=ExtResource("9_c1hp4")]
+[node name="Pallet_Small_Decorated_B3" parent="." unique_id=354375379 instance=ExtResource("9_c1hp4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9626, 0.5, -9.63996)
 
-[node name="table_medium_Decorated3" parent="." instance=ExtResource("11_qlfyb")]
+[node name="table_medium_Decorated3" parent="." unique_id=1393824887 instance=ExtResource("11_qlfyb")]
 transform = Transform3D(0.916447, 0, -0.400157, 0, 1, 0, 0.400157, 0, 0.916447, -13.1075, 0.770306, 1.36718)
 
-[node name="Workbench_Decorated2" parent="." instance=ExtResource("14_wcrvg")]
+[node name="Workbench_Decorated2" parent="." unique_id=525416316 instance=ExtResource("14_wcrvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1687, 0.5, -0.875494)
 
-[node name="Weaponrack_Decorated2" parent="." instance=ExtResource("12_kuaxq")]
+[node name="Weaponrack_Decorated2" parent="." unique_id=1784167180 instance=ExtResource("12_kuaxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19064, 0.5, -15.2207)
 
-[node name="Door_B2" parent="." instance=ExtResource("15_bvvud")]
+[node name="Door_B2" parent="." unique_id=2108584534 instance=ExtResource("15_bvvud")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.8737, 0.500001, -5.10412)
 
-[node name="Locker_Decorated4" parent="." instance=ExtResource("7_ifwf2")]
+[node name="Locker_Decorated4" parent="." unique_id=1745531625 instance=ExtResource("7_ifwf2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.42534, 0.500002, -14.29)
 
-[node name="Cube_Prototype_Large_B_003" parent="Locker_Decorated4/Locker_Decorated" index="0"]
+[node name="Cube_Prototype_Large_B_003" parent="Locker_Decorated4/Locker_Decorated" parent_id_path=PackedInt32Array(1745531625, 752399558) index="0" unique_id=408395202]
 visible = false
+
+[node name="EnemyRusher" parent="." unique_id=1725022929 instance=ExtResource("16_nh8n4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, 10)
+
+[node name="EnemyRusher2" parent="." unique_id=2013545336 instance=ExtResource("16_nh8n4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -10)
 
 [connection signal="is_dead" from="PlayerEntity" to="." method="on_player_death"]
 
