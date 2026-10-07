@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd5lrudlpxbay"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://ui/overlay_menu.gd" id="script"]
+[ext_resource type="Script" path="res://ui/level_complete_menu.gd" id="script"]
 [ext_resource type="Theme" path="res://ui/theme/game_theme.tres" id="theme"]
 
-[node name="GameOverMenu" type="Control"]
+[node name="LevelCompleteMenu" type="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
-color = Color(0.16, 0.01, 0.02, 0.82)
+color = Color(0.02, 0.03, 0.06, 0.78)
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -44,23 +44,30 @@ theme_override_constants/separation = 14
 [node name="Eyebrow" type="Label" parent="Center/Panel/Box"]
 layout_mode = 2
 theme_type_variation = &"EyebrowLabel"
-text = "GAME OVER"
+text = "WELL DONE"
 horizontal_alignment = 1
 
 [node name="Title" type="Label" parent="Center/Panel/Box"]
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
 theme_override_font_sizes/font_size = 64
-text = "YOU DIED"
+text = "LEVEL CLEARED"
 horizontal_alignment = 1
-theme_override_colors/font_color = Color(1, 0.3, 0.27, 1)
+theme_override_colors/font_color = Color(0.55, 0.92, 0.55, 1)
 
 [node name="Subtitle" type="Label" parent="Center/Panel/Box"]
 layout_mode = 2
 theme_type_variation = &"MutedLabel"
-text = "The minions got you. Shake it off and give it another go."
+text = "Every minion is down."
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="LevelLabel" type="Label" parent="Center/Panel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"KeyLabel"
+text = "Level"
+horizontal_alignment = 1
 
 [node name="Separator" type="HSeparator" parent="Center/Panel/Box"]
 layout_mode = 2
@@ -69,13 +76,20 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="NextButton" type="Button" parent="Center/Panel/Box/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Next level"
+theme_type_variation = &"AccentButton"
+
 [node name="RestartButton" type="Button" parent="Center/Panel/Box/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Try again"
-theme_type_variation = &"AccentButton"
+text = "Play again"
 
 [node name="MenuButton" type="Button" parent="Center/Panel/Box/Buttons"]
 unique_name_in_owner = true
@@ -84,13 +98,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Main menu"
 
-[node name="QuitButton" type="Button" parent="Center/Panel/Box/Buttons"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 62)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Quit game"
-
+[connection signal="pressed" from="Center/Panel/Box/Buttons/NextButton" to="." method="_on_action" binds= [&"next"]]
 [connection signal="pressed" from="Center/Panel/Box/Buttons/RestartButton" to="." method="_on_action" binds= [&"restart"]]
 [connection signal="pressed" from="Center/Panel/Box/Buttons/MenuButton" to="." method="_on_action" binds= [&"menu"]]
-[connection signal="pressed" from="Center/Panel/Box/Buttons/QuitButton" to="." method="_on_action" binds= [&"quit"]]

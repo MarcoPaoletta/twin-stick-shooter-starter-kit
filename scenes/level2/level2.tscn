@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b87aieg3uitnk"]
+[gd_scene format=3 uid="uid://b87aieg3uitnk"]
 
 [ext_resource type="MeshLibrary" uid="uid://1r1ria7fpq17" path="res://kits/mesh_lib3.tres" id="6_g7j5a"]
 [ext_resource type="PackedScene" uid="uid://dfpm8iiyrvwb8" path="res://assets/prototype_bits/Can_A.gltf" id="7_wgtu6"]
@@ -32,10 +32,21 @@
 [ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/PlayerEntity.tscn" id="33_knj36"]
 [ext_resource type="PackedScene" uid="uid://cyg3765gfh25q" path="res://assets/prototype_bits/target_stand_A_Decorated.gltf" id="34_6gqwg"]
 [ext_resource type="PackedScene" uid="uid://b4pnyn61mwgsh" path="res://assets/prototype_bits/target.gltf" id="35_e6ad7"]
+[ext_resource type="PackedScene" uid="uid://dyssgs4g0elmf" path="res://enemies/melee/minion/EnemyMinion.tscn" id="en"]
+[ext_resource type="Script" uid="uid://ijrpu1bsamse" path="res://scenes/level_manager.gd" id="lm"]
 
-[node name="Level2" type="Node3D"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_glfrj"]
+vertices = PackedVector3Array(3.5, 4.5, -22.53, 3.5, 4.5, -20.53, 4.25, 4.5, -20.53, 11.75, 4.5, -20.03, 12.75, 4.5, -20.78, 12.75, 4.5, -22.28, 9.5, 4.5, -22.53, 9.25, 4.5, -22.03, 5, 4.5, -19.78, 7, 4.5, -22.03, 6.75, 4.5, -22.53, 5, 4.5, -18.53, 8, 4.5, -15.530001, 12, 4.5, -17.53, 1.75, 4.75, -17.03, 1.5, 5.5, -17.78, 1, 4.5, -16.78, 0.5, 4.5, -15.780001, -0.25, 4.5, -17.03, -0.5, 4.5, -16.28, 8, 4.5, -14.530001, 6.75, 4.5, -13.530001, 6.75, 4.5, -12.780001, 6.75, 4.5, -9.530001, 7.5, 4.5, -8.280001, 8.5, 4.5, -8.280001, 3.5, 4.5, -11.280001, 2, 4.5, -12.780001, 1.5, 4.5, -12.280001, 1.5, 4.5, -9.280001, 9.25, 4.5, -9.530001, 4.75, 4.5, -11.280001, 12.5, 4.5, -17.03, 15.25, 4.5, -12.030001, 15.25, 4.5, -17.03, 16.75, 4.5, -9.280001, 15.75, 4.5, -10.280001, 3.5, 5, -16.28, 4.75, 5, -16.28, 4, 5, -17.03, -17.5, 8.25, -3.5300007, -17.5, 8, -2.7800007, -17, 8, -2.7800007, -17, 8, -3.5300007, 8.5, 0.50000006, 7.2199993, 9.75, 0.25000006, 6.4699993, 10.5, 0.25000006, 5.2199993, 7.5, 0.25000006, 4.2199993, 6.5, 0.50000006, 5.2199993, 11, 0.25000006, 2.7199993, 8.5, 0.25000006, 0.9699993, 15.5, 0.25000006, 4.2199993, 15.75, 0.25000006, 2.7199993, 8.5, 0.25000006, -3.2800007, 7.5, 0.25000006, -3.2800007, 16.5, 0.25000006, 5.2199993, -16.25, 4, -2.2800007, -16.25, 4, -1.0300007, -15, 4, -1.7800007, -15, 4, -2.2800007, -10, 4.5, 4.9699993, -12, 4.5, 4.9699993, -11.25, 4.5, 5.7199993, -11.25, 4.5, 6.4699993, -9, 4.5, 6.2199993, -10, 4.5, 2.9699993, -9.5, 4.5, 3.4699993, -6.5, 4.5, 3.9699993, -7, 4.5, -2.2800007, -11.25, 4.5, -2.2800007, -11.75, 4.25, 0.4699993, -10.583334, 4, 2.1366653, -8.25, 4.5, 7.2199993, -6.75, 4.5, 7.2199993, -12.75, 5.25, 0.9699993, -12.75, 5.25, 3.2199993, -11.375, 4, 3.0949993, -5.5, 0.25000006, 9.219999, -6.25, 0.25000006, 9.219999, -6.25, 0.25000006, 10.719999, -5.5, 0.25000006, 11.219999, -4.75, 0.25000006, 8.469999, -0.5, 0.25000006, 14.719999, -0.25, 0.25000006, 15.219999, 1.5, 0.50000006, 14.719999, -3, 0.25000006, 13.719999, -2.25, 0.50000006, 14.719999, -5.5, 0.25000006, 12.469999, -4.25, 0.50000006, 13.969999, 1.5, 0.25000006, 9.719999, 0.5, 0.25000006, 8.969999, 0.5, -0.24999994, 1.4699993, -0.75, -0.24999994, 1.4699993, -0.75, -0.24999994, 4.4699993, 0.5, -0.24999994, 6.4699993, -1.5, -0.24999994, 5.2199993, -4.5, -0.24999994, 5.2199993, -4.666668, -0.24999994, 7.3866653, -2.2399864, -0.24999994, 7.205986, 4.75, 0.25000006, 4.4699993, 4.75, 0.25000006, 3.7199993, 2.5, 0.25000006, 3.4699993, 2.5, 0.25000006, 6.4699993, 3.75, 0.25000006, 7.2199993, 5.5, 0.50000006, 5.2199993, 6.25, 0.25000006, 10.719999, 3.75, 0.25000006, 8.969999, 3, 0.25000006, 9.719999, 6.5, 0.25000006, 14.719999, 7, 0.50000006, 9.969999, 8.5, 0.25000006, 9.719999, -16.25, 4, 6.4699993, -15, 4, 6.4699993, -15.5, 4, 5.2199993, -16.25, 4, 5.2199993, -17.75, 8.25, 7.4699993, -17, 8, 7.7199993, -17, 8, 6.9699993, -6.75, 1.5, 14.219999, -6.25, 1.5, 14.719999, -6.25, 1.25, 13.969999, 1.25, 0.50000006, 18.22, 2, 0.50000006, 17.47, 0.75, 0.50000006, 17.47, 0, 0.50000006, 16.72, -0.5, 0.50000006, 17.47, -2.75, 0.50000006, 20.72, -4.5, 0.25000006, 20.47, -4.5, 0.25000006, 28.22, 3, 0.25000006, 34.22, 3.25, 0.25000006, 36.22, 4.75, 0.25000006, 35.47, 4.25, 0.25000006, 32.47, -6.25, 0.25000006, 29.97, -3.5, 0.50000006, 33.22, 2.25, 0.25000006, 33.47, -1.5, 0.50000006, 17.47, -1.75, 0.50000006, 19.72, 1.25, 0.50000006, 19.47, -1, 0.50000006, 33.22, 4.75, 0.50000006, 32.22, 4.75, 0.25000006, 19.97, 2.25, 0.25000006, 20.47, -0.75, 0.50000006, 33.72, -20.5, 0.25000006, 25.47, -19.25, 0.25000006, 26.72, -19.25, 0.25000006, 25.47, -19.75, 0.25000006, 27.97, -19.75, 0.25000006, 29.72, -19, 0.50000006, 29.72, -30.25, 0.50000006, 34.97, -29.5, 0.50000006, 34.97, -29.5, 0.50000006, 33.72, -33, 0.50000006, 32.22, -34, 0.75000006, 32.97, -33.25, 0.50000006, 33.72, -30.75, 0.50000006, 32.72, -31, 0.50000006, 35.72, -28.25, 0.25000006, 31.72, -26.75, 0.50000006, 31.72, -25, 0.25000006, 29.72, -30, 0.25000006, 29.47, -29.5, 0.50000006, 30.97, -33.75, 0.50000006, 35.22, -36.5, 0.25000006, 35.22, -36.5, 0.25000006, 36.72, -33, 0.50000006, 36.47, -32.25, 0.25000006, 37.22, -25, 0.50000006, 32.97, -24.5, 0.25000006, 29.22, -31.5, 0.50000006, 42.97, -32.5, 0.25000006, 43.22, -5.5, 0.50000006, 35.72, -4.5, 0.50000006, 35.72, -4.5, 0.50000006, 33.97, -11.75, 0.50000006, 33.72, -14.25, 0.50000006, 33.72, -14.25, 0.50000006, 34.72, -13.25, 0.50000006, 38.72, -14.25, 0.25000006, 40.47, -12.75, 0.25000006, 41.72, -7.25, 0.25000006, 39.72, -6.5, 0.50000006, 39.22, -6.5, 0.50000006, 36.72, -15.5, 0.25000006, 36.22, -13.25, 0.25000006, 37.72, -7.75, 0.25000006, 31.72, -9.75, 0.50000006, 31.97, -11.25, 0.50000006, 33.22, -7.5, 0.25000006, 41.72, -16, 0.25000006, 29.47, -15.5, 0.50000006, 30.47, -11.5, 0.50000006, 30.47, -10.5, 0.25000006, 29.47, -10.5, 0.25000006, 31.22, -10.75, 0.25000006, 31.22, -29, 4, 40.97, -29, 4, 43.22, -26.5, 4, 43.22, -26.5, 4, 40.97, -18.75, 0.25000006, 42.22, -17, 0.50000006, 42.97, -17.5, 0.25000006, 41.47, -15.25, 0.25000006, 45.22, -16.75, 0.25000006, 43.72, -16.75, 0.25000006, 44.97, -17.75, 0.25000006, 45.72, -16.25, 0.25000006, 47.47, -14.25, 0.25000006, 47.22, -13.75, 0.25000006, 46.47, -12, 0.50000006, 42.47, -12, 0.25000006, 43.22, -14, 0.25000006, 45.22, -10, 0.25000006, 46.47, -9, 0.25000006, 47.72, -7.25, 0.25000006, 47.97, -21.25, 0.25000006, 42.22, -20.5, 0.50000006, 42.47, -20.75, 0.25000006, 41.97, -23, 0.50000006, 43.72, -24, 0.50000006, 42.97, -24.25, 0.25000006, 44.47, -23, 0.50000006, 44.97, -30.75, 0.25000006, 45.22, -31.5, 0.50000006, 44.47, -32.25, 0.25000006, 48.97, -25, 0.25000006, 45.22, -22.25, 0.25000006, 45.72, -31.5, 0.25000006, 49.47, -29.75, 0.25000006, 49.22, -28.25, 0.25000006, 45.47, -28.75, 0.25000006, 50.72, -23, 0.25000006, 50.47, -22.25, 0.25000006, 51.47, -21.5, 0.25000006, 45.72, -16.75, 0.25000006, 47.97, -17.5, 0.50000006, 51.22, -16.75, 0.25000006, 50.72, -22.5, 0.25000006, 53.22, -17.5, 0.25000006, 52.97, -13, 4, 48.97, -13, 4, 51.47, -11, 4, 51.47, -11, 4, 48.97)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 7), PackedInt32Array(2, 0, 8), PackedInt32Array(8, 0, 10), PackedInt32Array(8, 10, 9), PackedInt32Array(7, 3, 9), PackedInt32Array(9, 3, 13), PackedInt32Array(9, 13, 12), PackedInt32Array(9, 12, 11), PackedInt32Array(11, 8, 9), PackedInt32Array(16, 15, 14), PackedInt32Array(17, 16, 14), PackedInt32Array(19, 18, 17), PackedInt32Array(17, 18, 16), PackedInt32Array(22, 21, 20), PackedInt32Array(25, 24, 23), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(25, 23, 30), PackedInt32Array(30, 23, 22), PackedInt32Array(22, 23, 31), PackedInt32Array(13, 32, 12), PackedInt32Array(12, 32, 20), PackedInt32Array(31, 23, 26), PackedInt32Array(26, 23, 29), PackedInt32Array(32, 34, 33), PackedInt32Array(30, 36, 35), PackedInt32Array(22, 20, 30), PackedInt32Array(30, 20, 32), PackedInt32Array(30, 32, 33), PackedInt32Array(30, 33, 36), PackedInt32Array(37, 39, 38), PackedInt32Array(43, 42, 40), PackedInt32Array(40, 42, 41), PackedInt32Array(45, 44, 46), PackedInt32Array(46, 44, 47), PackedInt32Array(47, 44, 48), PackedInt32Array(46, 47, 49), PackedInt32Array(49, 47, 50), PackedInt32Array(49, 52, 51), PackedInt32Array(53, 50, 54), PackedInt32Array(54, 50, 47), PackedInt32Array(51, 55, 49), PackedInt32Array(49, 55, 46), PackedInt32Array(59, 58, 56), PackedInt32Array(56, 58, 57), PackedInt32Array(62, 61, 60), PackedInt32Array(62, 60, 63), PackedInt32Array(63, 60, 64), PackedInt32Array(65, 71, 66), PackedInt32Array(66, 71, 70), PackedInt32Array(66, 70, 69), PackedInt32Array(66, 69, 68), PackedInt32Array(66, 68, 67), PackedInt32Array(73, 72, 64), PackedInt32Array(60, 66, 64), PackedInt32Array(64, 66, 67), PackedInt32Array(64, 67, 73), PackedInt32Array(65, 76, 71), PackedInt32Array(71, 76, 75), PackedInt32Array(71, 75, 74), PackedInt32Array(71, 74, 70), PackedInt32Array(79, 78, 77), PackedInt32Array(79, 77, 80), PackedInt32Array(80, 77, 81), PackedInt32Array(84, 83, 82), PackedInt32Array(82, 86, 85), PackedInt32Array(88, 87, 85), PackedInt32Array(85, 87, 80), PackedInt32Array(80, 81, 85), PackedInt32Array(85, 81, 90), PackedInt32Array(85, 90, 89), PackedInt32Array(85, 89, 84), PackedInt32Array(92, 91, 93), PackedInt32Array(93, 91, 94), PackedInt32Array(93, 94, 90), PackedInt32Array(95, 93, 90), PackedInt32Array(81, 98, 90), PackedInt32Array(90, 98, 95), PackedInt32Array(95, 98, 96), PackedInt32Array(96, 98, 97), PackedInt32Array(97, 98, 81), PackedInt32Array(84, 82, 85), PackedInt32Array(101, 100, 99), PackedInt32Array(104, 103, 99), PackedInt32Array(99, 103, 102), PackedInt32Array(99, 102, 101), PackedInt32Array(107, 106, 105), PackedInt32Array(107, 105, 89), PackedInt32Array(89, 105, 108), PackedInt32Array(89, 108, 84), PackedInt32Array(44, 110, 109), PackedInt32Array(103, 104, 48), PackedInt32Array(105, 106, 109), PackedInt32Array(109, 106, 103), PackedInt32Array(109, 103, 44), PackedInt32Array(44, 103, 48), PackedInt32Array(114, 113, 111), PackedInt32Array(111, 113, 112), PackedInt32Array(117, 116, 115), PackedInt32Array(120, 119, 118), PackedInt32Array(123, 122, 121), PackedInt32Array(124, 123, 125), PackedInt32Array(125, 123, 121), PackedInt32Array(128, 127, 126), PackedInt32Array(130, 129, 131), PackedInt32Array(131, 129, 132), PackedInt32Array(134, 133, 128), PackedInt32Array(132, 129, 135), PackedInt32Array(125, 121, 136), PackedInt32Array(136, 121, 138), PackedInt32Array(136, 138, 137), PackedInt32Array(134, 128, 139), PackedInt32Array(139, 128, 140), PackedInt32Array(140, 128, 142), PackedInt32Array(140, 142, 141), PackedInt32Array(140, 132, 139), PackedInt32Array(143, 139, 135), PackedInt32Array(135, 139, 132), PackedInt32Array(138, 142, 137), PackedInt32Array(137, 142, 126), PackedInt32Array(126, 142, 128), PackedInt32Array(146, 145, 144), PackedInt32Array(149, 148, 147), PackedInt32Array(152, 151, 150), PackedInt32Array(154, 153, 155), PackedInt32Array(155, 153, 156), PackedInt32Array(152, 150, 157), PackedInt32Array(158, 162, 159), PackedInt32Array(159, 162, 161), PackedInt32Array(159, 161, 160), PackedInt32Array(164, 163, 165), PackedInt32Array(165, 163, 166), PackedInt32Array(152, 157, 156), PackedInt32Array(156, 157, 155), PackedInt32Array(155, 157, 163), PackedInt32Array(163, 157, 167), PackedInt32Array(167, 166, 163), PackedInt32Array(160, 169, 159), PackedInt32Array(159, 169, 168), PackedInt32Array(162, 158, 156), PackedInt32Array(156, 158, 152), PackedInt32Array(171, 167, 170), PackedInt32Array(170, 167, 157), PackedInt32Array(174, 173, 172), PackedInt32Array(177, 176, 175), PackedInt32Array(180, 179, 178), PackedInt32Array(183, 182, 181), PackedInt32Array(184, 177, 185), PackedInt32Array(185, 177, 175), PackedInt32Array(172, 183, 174), PackedInt32Array(174, 183, 186), PackedInt32Array(180, 178, 185), PackedInt32Array(188, 187, 175), PackedInt32Array(175, 187, 186), PackedInt32Array(174, 186, 134), PackedInt32Array(134, 186, 133), PackedInt32Array(181, 189, 180), PackedInt32Array(191, 190, 192), PackedInt32Array(192, 190, 193), PackedInt32Array(186, 183, 175), PackedInt32Array(175, 183, 181), PackedInt32Array(175, 181, 185), PackedInt32Array(185, 181, 180), PackedInt32Array(195, 192, 194), PackedInt32Array(194, 192, 193), PackedInt32Array(194, 187, 195), PackedInt32Array(195, 187, 188), PackedInt32Array(199, 198, 196), PackedInt32Array(196, 198, 197), PackedInt32Array(202, 201, 200), PackedInt32Array(205, 204, 203), PackedInt32Array(209, 208, 203), PackedInt32Array(203, 208, 207), PackedInt32Array(203, 207, 205), PackedInt32Array(205, 207, 206), PackedInt32Array(210, 180, 189), PackedInt32Array(212, 211, 209), PackedInt32Array(209, 211, 213), PackedInt32Array(214, 213, 215), PackedInt32Array(215, 213, 211), PackedInt32Array(215, 211, 210), PackedInt32Array(215, 210, 189), PackedInt32Array(209, 203, 212), PackedInt32Array(218, 217, 216), PackedInt32Array(222, 221, 219), PackedInt32Array(219, 221, 220), PackedInt32Array(225, 224, 223), PackedInt32Array(170, 224, 171), PackedInt32Array(171, 224, 225), PackedInt32Array(221, 222, 226), PackedInt32Array(226, 222, 227), PackedInt32Array(228, 225, 229), PackedInt32Array(229, 225, 223), PackedInt32Array(229, 223, 230), PackedInt32Array(229, 230, 231), PackedInt32Array(231, 230, 226), PackedInt32Array(231, 226, 227), PackedInt32Array(231, 227, 232), PackedInt32Array(227, 234, 232), PackedInt32Array(232, 234, 233), PackedInt32Array(206, 207, 235), PackedInt32Array(237, 236, 235), PackedInt32Array(235, 236, 206), PackedInt32Array(206, 236, 234), PackedInt32Array(234, 236, 233), PackedInt32Array(236, 239, 233), PackedInt32Array(233, 239, 238), PackedInt32Array(243, 242, 240), PackedInt32Array(240, 242, 241)]
+geometry_parsed_geometry_type = 0
+geometry_source_geometry_mode = 1
+geometry_source_group_name = &"nav_source"
+agent_radius = 1.0
 
-[node name="GridMapBuilding" type="GridMap" parent="."]
+[node name="Level2" type="Node3D" unique_id=75813653]
+script = ExtResource("lm")
+
+[node name="GridMapBuilding" type="GridMap" parent="." unique_id=69355746 groups=["nav_source"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh_library = ExtResource("6_g7j5a")
 cell_octant_size = 18
@@ -48,358 +59,358 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Room1_StaticObjects" type="Node3D" parent="GridMapBuilding"]
+[node name="Room1_StaticObjects" type="Node3D" parent="GridMapBuilding" unique_id=331730357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Can_A2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("7_wgtu6")]
+[node name="Can_A2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1792269408 instance=ExtResource("7_wgtu6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 15)
 
-[node name="Pallet_Small_Decorated_B3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("8_5cxr2")]
+[node name="Pallet_Small_Decorated_B3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1818278339 instance=ExtResource("8_5cxr2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 14.5)
 
-[node name="Pallet_Small_Decorated_B5" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("8_5cxr2")]
+[node name="Pallet_Small_Decorated_B5" parent="GridMapBuilding/Room1_StaticObjects" unique_id=127715013 instance=ExtResource("8_5cxr2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, 9.5)
 explosion = null
 
-[node name="Pallet_Small_Decorated_A2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("9_q48ew")]
+[node name="Pallet_Small_Decorated_A2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1012987581 instance=ExtResource("9_q48ew")]
 transform = Transform3D(0.988316, 0, 0.152417, 0, 1, 0, -0.152417, 0, 0.988316, 8.5, 0, 12)
 
-[node name="Pallet_Small_Decorated_A3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("9_q48ew")]
+[node name="Pallet_Small_Decorated_A3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1712113158 instance=ExtResource("9_q48ew")]
 transform = Transform3D(0.999179, 0, -0.0405155, 0, 1, 0, 0.0405155, 0, 0.999179, 4, 0, 1.5)
 
-[node name="Pallet_Small2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("10_r8g5u")]
+[node name="Pallet_Small2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1056838747 instance=ExtResource("10_r8g5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, 14.5)
 
-[node name="Pallet_Small3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("10_r8g5u")]
+[node name="Pallet_Small3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1848787988 instance=ExtResource("10_r8g5u")]
 transform = Transform3D(0.640271, 0.335215, -0.691147, 0, 0.899756, 0.436394, 0.768149, -0.27941, 0.576087, -6.5, 0.408185, 14.5)
 
-[node name="Box_C2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("11_10lro")]
+[node name="Box_C2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=902406984 instance=ExtResource("11_10lro")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -8.60065, 0.530238, 14.2394)
 
-[node name="Box_B2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("12_d5paq")]
+[node name="Box_B2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1199595739 instance=ExtResource("12_d5paq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.5, 15)
 
-[node name="Dummy_Base3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("13_ae10q")]
+[node name="Dummy_Base3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1379914355 instance=ExtResource("13_ae10q")]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 17, 0, 1)
 
-[node name="Locker_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1403447232 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 12.5, 0, 7.20575)
 
-[node name="Locker_Decorated7" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated7" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1525619590 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 11.3729, 0, 7.20575)
 
-[node name="Locker_Decorated10" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated10" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1440910374 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-0.983666, 0, -0.180004, 0, 1, 0, 0.180004, 0, -0.983666, 13.8918, 0, 7.2248)
 
-[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room1_StaticObjects/Locker_Decorated10/Locker_Decorated" index="0"]
+[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room1_StaticObjects/Locker_Decorated10/Locker_Decorated" parent_id_path=PackedInt32Array(1440910374, 946666508) index="0" unique_id=1810930714]
 visible = false
 
-[node name="Locker_Decorated3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=186714312 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 15.5, 0, 7.17464)
 
-[node name="Locker_Decorated4" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated4" parent="GridMapBuilding/Room1_StaticObjects" unique_id=129818003 instance=ExtResource("14_wxdma")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 15.4177, 0, 0.653378)
 
-[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room1_StaticObjects/Locker_Decorated4/Locker_Decorated" index="0"]
+[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room1_StaticObjects/Locker_Decorated4/Locker_Decorated" parent_id_path=PackedInt32Array(129818003, 946666508) index="0" unique_id=1810930714]
 visible = false
 
-[node name="Locker_Decorated5" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated5" parent="GridMapBuilding/Room1_StaticObjects" unique_id=63011114 instance=ExtResource("14_wxdma")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 12.4177, 0, 0.684489)
 
-[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room1_StaticObjects/Locker_Decorated5/Locker_Decorated" index="0"]
+[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room1_StaticObjects/Locker_Decorated5/Locker_Decorated" parent_id_path=PackedInt32Array(63011114, 946666508) index="0" unique_id=1810930714]
 visible = false
 
-[node name="Locker_Decorated6" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated6" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1494522952 instance=ExtResource("14_wxdma")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 11.1899, 0, 0.684489)
 
-[node name="Locker3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("15_4ldk2")]
+[node name="Locker3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=443836721 instance=ExtResource("15_4ldk2")]
 transform = Transform3D(0.983303, 0, -0.181978, 0, 1, 0, 0.181978, 0, 0.983303, 14.0412, 0, 0.700824)
 
-[node name="Pallet_Small4" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("10_r8g5u")]
+[node name="Pallet_Small4" parent="GridMapBuilding/Room1_StaticObjects" unique_id=460021523 instance=ExtResource("10_r8g5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0475, 6.5, 2.05134)
 
-[node name="Can_A3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("7_wgtu6")]
+[node name="Can_A3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1986636851 instance=ExtResource("7_wgtu6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1212, 7.03835, 2.16005)
 
-[node name="Can_B2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("16_ryvsm")]
+[node name="Can_B2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=910442557 instance=ExtResource("16_ryvsm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 7, 1.5)
 
-[node name="Can_A4" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("7_wgtu6")]
+[node name="Can_A4" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1050353602 instance=ExtResource("7_wgtu6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 7, 2.5)
 
-[node name="target_stand_A2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("18_7d3wp")]
+[node name="target_stand_A2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=745335183 instance=ExtResource("18_7d3wp")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5, 4, -2)
 
-[node name="target_stand_A3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("18_7d3wp")]
+[node name="target_stand_A3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=348224226 instance=ExtResource("18_7d3wp")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5, 4, 6.5)
 
-[node name="Locker_Decorated8" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated8" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1531235350 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14, 4, -0.5)
 
-[node name="Locker_Decorated9" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated9" parent="GridMapBuilding/Room1_StaticObjects" unique_id=812796671 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14, 4, 4.5)
 
-[node name="target_wall_large_A2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("19_sqmfd")]
+[node name="target_wall_large_A2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=815669908 instance=ExtResource("19_sqmfd")]
 transform = Transform3D(0.992762, 0.120102, 0, -0.120102, 0.992762, 0, 0, 0, 1, 11.5, 6, -23.6647)
 
-[node name="target_wall_large_A3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("19_sqmfd")]
+[node name="target_wall_large_A3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1542822150 instance=ExtResource("19_sqmfd")]
 transform = Transform3D(0.449736, -0.100968, 0.141308, 0.0905387, 0.513516, -0.00501265, -0.0637378, 0.0170125, 0.989953, 12.7983, 6, -23.6647)
 
-[node name="target_wall_large_B2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("20_u3j8q")]
+[node name="target_wall_large_B2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1221120199 instance=ExtResource("20_u3j8q")]
 transform = Transform3D(0.965926, 0.183013, -0.183013, 0, 0.707107, 0.707107, 0.258819, -0.683013, 0.683013, 1.7815, 4.76081, -17.863)
 
-[node name="Weaponrack_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("21_wai02")]
+[node name="Weaponrack_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=346162002 instance=ExtResource("21_wai02")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 1.5, 4, -19.5)
 
-[node name="Weaponrack_Decorated3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("21_wai02")]
+[node name="Weaponrack_Decorated3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=213867696 instance=ExtResource("21_wai02")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.5, 4, -19.5)
 
-[node name="Weaponrack2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("22_6r8a8")]
+[node name="Weaponrack2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=315620202 instance=ExtResource("22_6r8a8")]
 transform = Transform3D(-5.68248e-08, 0, 1.3, 0, 1.3, 0, -1.3, 0, -5.68248e-08, -1.5, 4, -17.5)
 
-[node name="Workbench_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("23_kicfg")]
+[node name="Workbench_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1641619645 instance=ExtResource("23_kicfg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 4, -19)
 
-[node name="Workbench_Decorated3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("23_kicfg")]
+[node name="Workbench_Decorated3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=791996393 instance=ExtResource("23_kicfg")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17, 4, -15)
 
-[node name="Workbench2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("24_bi6o1")]
+[node name="Workbench2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1472601493 instance=ExtResource("24_bi6o1")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17, 4, -16.5)
 
-[node name="Dummy_Base2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("13_ae10q")]
+[node name="Dummy_Base2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=657709138 instance=ExtResource("13_ae10q")]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 17, 4, -19)
 
-[node name="Dummy_Base4" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("13_ae10q")]
+[node name="Dummy_Base4" parent="GridMapBuilding/Room1_StaticObjects" unique_id=482015252 instance=ExtResource("13_ae10q")]
 transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 17, 4, -12.5)
 
-[node name="target_stand_B2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("25_ry6v2")]
+[node name="target_stand_B2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=511462173 instance=ExtResource("25_ry6v2")]
 transform = Transform3D(-0.221804, 0, -0.975091, 0, 1, 0, 0.975091, 0, -0.221804, 17, 4, -11.0773)
 
-[node name="table_medium2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("26_dol4e")]
+[node name="table_medium2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1069507686 instance=ExtResource("26_dol4e")]
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -0.444203, 4, -11.8966)
 
-[node name="table_medium_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("27_u2lrj")]
+[node name="table_medium_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=806448272 instance=ExtResource("27_u2lrj")]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 4, -14)
 
-[node name="Barrel_A2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=652944440 instance=ExtResource("29_514tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 4.5, -19)
 
-[node name="Barrel_A3" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A3" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1128815431 instance=ExtResource("29_514tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
 
-[node name="Barrel_B2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("30_imgvi")]
+[node name="Barrel_B2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=2052986423 instance=ExtResource("30_imgvi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 4.5, -18.5)
 
-[node name="Door_B2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("31_gnk3y")]
+[node name="Door_B2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1462893204 instance=ExtResource("31_gnk3y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.32414, 4.04713, -23.6489)
 
-[node name="Pallet_Large2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("32_tsnio")]
+[node name="Pallet_Large2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=546699005 instance=ExtResource("32_tsnio")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 4.13344, 4, -15.1116)
 
-[node name="Pallet_Small5" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("10_r8g5u")]
+[node name="Pallet_Small5" parent="GridMapBuilding/Room1_StaticObjects" unique_id=194113880 instance=ExtResource("10_r8g5u")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 4.5, 4.5, -14)
 
-[node name="Barrel_C2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=1028142454 instance=ExtResource("33_hsydh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.5, -10)
 
-[node name="target_stand_A_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("34_6gqwg")]
+[node name="target_stand_A_Decorated2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=841608280 instance=ExtResource("34_6gqwg")]
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 17, 0, 4)
 
-[node name="target2" parent="GridMapBuilding/Room1_StaticObjects" instance=ExtResource("35_e6ad7")]
+[node name="target2" parent="GridMapBuilding/Room1_StaticObjects" unique_id=317204609 instance=ExtResource("35_e6ad7")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 2, 7)
 
-[node name="Room2_StaticObjects" type="Node3D" parent="GridMapBuilding"]
+[node name="Room2_StaticObjects" type="Node3D" parent="GridMapBuilding" unique_id=909925825]
 
-[node name="Box_B2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("12_d5paq")]
+[node name="Box_B2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=367166607 instance=ExtResource("12_d5paq")]
 transform = Transform3D(2.46076, 0, -0.91251, 0, 2.62451, 0, 0.91251, 0, 2.46076, -8.00669, 0.529999, 29.1377)
 
-[node name="Box_A2" parent="GridMapBuilding/Room2_StaticObjects/Box_B2" instance=ExtResource("31_drbww")]
+[node name="Box_A2" parent="GridMapBuilding/Room2_StaticObjects/Box_B2" unique_id=800224452 instance=ExtResource("31_drbww")]
 transform = Transform3D(0.683459, 0, 0.435143, 0, 0.810226, 0, -0.435143, 0, 0.683459, -0.182285, 0, 0.493409)
 
-[node name="Can_B2" parent="GridMapBuilding/Room2_StaticObjects/Box_B2" instance=ExtResource("16_ryvsm")]
+[node name="Can_B2" parent="GridMapBuilding/Room2_StaticObjects/Box_B2" unique_id=1993730593 instance=ExtResource("16_ryvsm")]
 transform = Transform3D(0.357252, 0, 0.132478, 0, 0.381024, 0, -0.132478, 0, 0.357252, 0.15965, 0, 0.499887)
 
-[node name="Can_A2" parent="GridMapBuilding/Room2_StaticObjects/Box_B2" instance=ExtResource("7_wgtu6")]
+[node name="Can_A2" parent="GridMapBuilding/Room2_StaticObjects/Box_B2" unique_id=1878129660 instance=ExtResource("7_wgtu6")]
 transform = Transform3D(0.357252, 0, 0.132478, 0, 0.381024, 0, -0.132478, 0, 0.357252, 0.159422, 0, 0.340047)
 
-[node name="Box_B3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("12_d5paq")]
+[node name="Box_B3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=2070847680 instance=ExtResource("12_d5paq")]
 transform = Transform3D(1.84111, 0, 1.87039, 0, 2.62451, 0, -1.87039, 0, 1.84111, -32.0743, 0.529999, 29.7606)
 
-[node name="Box_A2" parent="GridMapBuilding/Room2_StaticObjects/Box_B3" instance=ExtResource("31_drbww")]
+[node name="Box_A2" parent="GridMapBuilding/Room2_StaticObjects/Box_B3" unique_id=860096676 instance=ExtResource("31_drbww")]
 transform = Transform3D(0.683459, 0, 0.435143, 0, 0.810226, 0, -0.435143, 0, 0.683459, -0.182285, 0, 0.493409)
 
-[node name="Can_B2" parent="GridMapBuilding/Room2_StaticObjects/Box_B3" instance=ExtResource("16_ryvsm")]
+[node name="Can_B2" parent="GridMapBuilding/Room2_StaticObjects/Box_B3" unique_id=1426593893 instance=ExtResource("16_ryvsm")]
 transform = Transform3D(0.357252, 0, 0.132478, 0, 0.381024, 0, -0.132478, 0, 0.357252, 0.15965, 0, 0.499887)
 
-[node name="Can_A2" parent="GridMapBuilding/Room2_StaticObjects/Box_B3" instance=ExtResource("7_wgtu6")]
+[node name="Can_A2" parent="GridMapBuilding/Room2_StaticObjects/Box_B3" unique_id=708079786 instance=ExtResource("7_wgtu6")]
 transform = Transform3D(0.357252, 0, 0.132478, 0, 0.381024, 0, -0.132478, 0, 0.357252, 0.159422, 0, 0.340047)
 
-[node name="Cube_Prototype_Small2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("32_53hy4")]
+[node name="Cube_Prototype_Small2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1769936124 instance=ExtResource("32_53hy4")]
 transform = Transform3D(0.91414, 0, -0.405397, 0, 1, 0, 0.405397, 0, 0.91414, -27.1769, 0.53, 34.0947)
 
-[node name="Cube_Prototype_Small3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("32_53hy4")]
+[node name="Cube_Prototype_Small3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=828166118 instance=ExtResource("32_53hy4")]
 transform = Transform3D(0.983891, 0, 0.178768, 0, 1, 0, -0.178768, 0, 0.983891, 0.914879, 0.53, 35.6299)
 
-[node name="Dummy_Base2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("13_ae10q")]
+[node name="Dummy_Base2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1240253 instance=ExtResource("13_ae10q")]
 transform = Transform3D(0.931418, 0, 0.36395, 0, 1, 0, -0.36395, 0, 0.931418, -24.2351, 0.530001, 26.9038)
 
-[node name="Dummy_Base3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("13_ae10q")]
+[node name="Dummy_Base3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1433135912 instance=ExtResource("13_ae10q")]
 transform = Transform3D(0.954396, 0, -0.298541, 0, 1, 0, 0.298541, 0, 0.954396, -21.2106, 0.530001, 26.9038)
 
-[node name="Locker2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("15_4ldk2")]
+[node name="Locker2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1907312591 instance=ExtResource("15_4ldk2")]
 transform = Transform3D(-1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, -1, -17.1817, 0.5, 55.0293)
 
-[node name="target_stand_A2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("18_7d3wp")]
+[node name="target_stand_A2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=307385527 instance=ExtResource("18_7d3wp")]
 transform = Transform3D(-1.40662, 0.00283562, 0.371983, 0.00327598, 1.45497, 0.00129664, -0.371979, 0.00209107, -1.40662, -20.338, 0.5, 54.41)
 
-[node name="Locker3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("15_4ldk2")]
+[node name="Locker3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1517984614 instance=ExtResource("15_4ldk2")]
 transform = Transform3D(-0.566766, 0, 0.823879, 0, 1, 0, -0.823879, 0, -0.566766, -16.109, 0.500001, 40.8873)
 
-[node name="target_stand_A3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("18_7d3wp")]
+[node name="target_stand_A3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1326786935 instance=ExtResource("18_7d3wp")]
 transform = Transform3D(-1.40662, 0.00283562, 0.371983, 0.00327598, 1.45497, 0.00129664, -0.371979, 0.00209107, -1.40662, -15.1279, 0.5, 38.0013)
 
-[node name="target2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("35_e6ad7")]
+[node name="target2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1943041940 instance=ExtResource("35_e6ad7")]
 transform = Transform3D(-1.34821, 0, 1.17864e-07, 0, 1.34821, 0, -1.17864e-07, 0, -1.34821, -10.984, 2.41061, 47.8027)
 
-[node name="Barrel_B2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("30_imgvi")]
+[node name="Barrel_B2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1851150061 instance=ExtResource("30_imgvi")]
 transform = Transform3D(1.1047, 0, 0, 0, 1.1047, 0, 0, 0, 1.1047, 3.62674, 1.03, 38.0198)
 
-[node name="Barrel_A2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1736854354 instance=ExtResource("29_514tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8476, 1.03, 37.1246)
 
-[node name="Barrel_A3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1755670637 instance=ExtResource("29_514tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8476, 1.03, 38.5758)
 
-[node name="Barrel_A5" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A5" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1678738897 instance=ExtResource("29_514tw")]
 transform = Transform3D(-4.92417e-08, 0, 1.12652, 0, 1.12652, 0, -1.12652, 0, -4.92417e-08, -30.5135, 1.03, 50.9264)
 
-[node name="Barrel_C2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1278976787 instance=ExtResource("33_hsydh")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.77598, 1.03, 38.4851)
 
-[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C2" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C2" unique_id=1615095074 instance=ExtResource("33_hsydh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1592, 0, -0.0559793)
 
-[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C2" instance=ExtResource("29_514tw")]
+[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C2" unique_id=1620222354 instance=ExtResource("29_514tw")]
 transform = Transform3D(1.12652, 0, 0, 0, 1.12652, 0, 0, 0, 1.12652, -0.193115, 0, 1.17342)
 
-[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1540843501 instance=ExtResource("33_hsydh")]
 transform = Transform3D(0.890506, 0, -0.45497, 0, 1, 0, 0.45497, 0, 0.890506, 3.63072, 1.03, 17.8373)
 
-[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C3" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C3" unique_id=1585384854 instance=ExtResource("33_hsydh")]
 transform = Transform3D(1.14322, 0, 0, 0, 1.14322, 0, 0, 0, 1.14322, 1.1592, 0, -0.0559788)
 
-[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C3" instance=ExtResource("29_514tw")]
+[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C3" unique_id=1206508748 instance=ExtResource("29_514tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.193115, 0, 1.17342)
 
-[node name="Pallet_Small_Decorated_B2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("8_5cxr2")]
+[node name="Pallet_Small_Decorated_B2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1880207419 instance=ExtResource("8_5cxr2")]
 transform = Transform3D(0.963775, 0, 0.266717, 0, 1, 0, -0.266717, 0, 0.963775, 1.46351, 0.529999, 37.9631)
 
-[node name="Cube_Prototype_Small4" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("32_53hy4")]
+[node name="Cube_Prototype_Small4" parent="GridMapBuilding/Room2_StaticObjects" unique_id=365696094 instance=ExtResource("32_53hy4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36304, 0.5, 35.4099)
 
-[node name="Pallet_Small_Decorated_B3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("8_5cxr2")]
+[node name="Pallet_Small_Decorated_B3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1380766677 instance=ExtResource("8_5cxr2")]
 transform = Transform3D(0.996645, 0, 0.0818515, 0, 1, 0, -0.0818515, 0, 0.996645, -1.70472, 0.529999, 37.9631)
 
-[node name="Cube_Prototype_Small5" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("32_53hy4")]
+[node name="Cube_Prototype_Small5" parent="GridMapBuilding/Room2_StaticObjects" unique_id=283374384 instance=ExtResource("32_53hy4")]
 transform = Transform3D(-0.0720021, 0, -0.997404, 0, 1, 0, 0.997404, 0, -0.0720021, -21.116, 0.53, 34.9437)
 
-[node name="Barrel_B3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("30_imgvi")]
+[node name="Barrel_B3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=878199422 instance=ExtResource("30_imgvi")]
 transform = Transform3D(-0.275232, 0, -1.06986, 0, 1.1047, 0, 1.06986, 0, -0.275232, -24.1061, 1.03, 36.9746)
 
-[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects" unique_id=733246225 instance=ExtResource("29_514tw")]
 transform = Transform3D(-0.249146, 0, -0.968466, 0, 1, 0, 0.968466, 0, -0.249146, -23.5433, 1.03, 38.38)
 
-[node name="Barrel_A6" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A6" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1352082066 instance=ExtResource("29_514tw")]
 transform = Transform3D(-0.249146, 0, -0.968466, 0, 1, 0, 0.968466, 0, -0.249146, -24.9488, 1.03, 38.0184)
 
-[node name="Barrel_C4" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C4" parent="GridMapBuilding/Room2_StaticObjects" unique_id=41827346 instance=ExtResource("33_hsydh")]
 transform = Transform3D(0.968466, 0, -0.249146, 0, 1, 0, 0.249146, 0, 0.968466, -22.4633, 1.03, 28.7209)
 
-[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C4" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C4" unique_id=811398746 instance=ExtResource("33_hsydh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1592, 0, -0.0559793)
 
-[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C4" instance=ExtResource("29_514tw")]
+[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C4" unique_id=754303353 instance=ExtResource("29_514tw")]
 transform = Transform3D(1.12652, 0, 0, 0, 1.12652, 0, 0, 0, 1.12652, -0.193115, 0, 1.17342)
 
-[node name="Pallet_Small_Decorated_B4" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("8_5cxr2")]
+[node name="Pallet_Small_Decorated_B4" parent="GridMapBuilding/Room2_StaticObjects" unique_id=262387170 instance=ExtResource("8_5cxr2")]
 transform = Transform3D(0.0181853, 0, -0.999835, 0, 1, 0, 0.999835, 0, 0.0181853, -23.5123, 0.529999, 34.8937)
 
-[node name="Cube_Prototype_Small6" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("32_53hy4")]
+[node name="Cube_Prototype_Small6" parent="GridMapBuilding/Room2_StaticObjects" unique_id=2008206309 instance=ExtResource("32_53hy4")]
 transform = Transform3D(-0.249146, 0, -0.968466, 0, 1, 0, 0.968466, 0, -0.249146, -20.0862, 0.5, 31.8239)
 
-[node name="Pallet_Small_Decorated_B5" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("8_5cxr2")]
+[node name="Pallet_Small_Decorated_B5" parent="GridMapBuilding/Room2_StaticObjects" unique_id=797962811 instance=ExtResource("8_5cxr2")]
 transform = Transform3D(-0.16904, 0, -0.98561, 0, 1, 0, 0.98561, 0, -0.16904, -22.7229, 0.529999, 31.8254)
 
-[node name="Cube_Prototype_Small7" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("32_53hy4")]
+[node name="Cube_Prototype_Small7" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1789460648 instance=ExtResource("32_53hy4")]
 transform = Transform3D(0.711597, 0, 0.702588, 0, 1, 0, -0.702588, 0, 0.711597, -14.562, 0.53, 42.8328)
 
-[node name="Barrel_B4" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("30_imgvi")]
+[node name="Barrel_B4" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1581529833 instance=ExtResource("30_imgvi")]
 transform = Transform3D(0.912189, 0, 0.623116, 0, 1.1047, 0, -0.623116, 0, 0.912189, -18.0056, 1.03, 31.4764)
 
-[node name="Barrel_A7" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A7" parent="GridMapBuilding/Room2_StaticObjects" unique_id=755223443 instance=ExtResource("29_514tw")]
 transform = Transform3D(0.825734, 0, 0.564059, 0, 1, 0, -0.564059, 0, 0.825734, -17.5024, 1.03, 30.0486)
 
-[node name="Barrel_A8" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("29_514tw")]
+[node name="Barrel_A8" parent="GridMapBuilding/Room2_StaticObjects" unique_id=2112658753 instance=ExtResource("29_514tw")]
 transform = Transform3D(0.825734, 0, 0.564059, 0, 1, 0, -0.564059, 0, 0.825734, -16.6839, 1.03, 31.2469)
 
-[node name="Barrel_C5" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C5" parent="GridMapBuilding/Room2_StaticObjects" unique_id=155116250 instance=ExtResource("33_hsydh")]
 transform = Transform3D(0.971751, 0, 0.236007, 0, 1, 0, -0.236007, 0, 0.971751, -21.9253, 1.03, 37.3542)
 
-[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C5" instance=ExtResource("33_hsydh")]
+[node name="Barrel_C3" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C5" unique_id=789832323 instance=ExtResource("33_hsydh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1592, 0, -0.0559793)
 
-[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C5" instance=ExtResource("29_514tw")]
+[node name="Barrel_A4" parent="GridMapBuilding/Room2_StaticObjects/Barrel_C5" unique_id=1315400707 instance=ExtResource("29_514tw")]
 transform = Transform3D(1.12652, 0, 0, 0, 1.12652, 0, 0, 0, 1.12652, -0.193115, 0, 1.17342)
 
-[node name="Pallet_Small_Decorated_B6" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("8_5cxr2")]
+[node name="Pallet_Small_Decorated_B6" parent="GridMapBuilding/Room2_StaticObjects" unique_id=362888412 instance=ExtResource("8_5cxr2")]
 transform = Transform3D(0.645378, 0, 0.763864, 0, 1, 0, -0.763864, 0, 0.645378, -17.5533, 0.529999, 35.6208)
 
-[node name="Cube_Prototype_Small8" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("32_53hy4")]
+[node name="Cube_Prototype_Small8" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1342460052 instance=ExtResource("32_53hy4")]
 transform = Transform3D(0.877891, 0, -0.478861, 0, 1, 0, 0.478861, 0, 0.877891, -23.0866, 0.5, 41.1779)
 
-[node name="Pallet_Small_Decorated_B7" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("8_5cxr2")]
+[node name="Pallet_Small_Decorated_B7" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1816323884 instance=ExtResource("8_5cxr2")]
 transform = Transform3D(0.776795, 0, 0.629754, 0, 1, 0, -0.629754, 0, 0.776795, -19.537, 0.529999, 40.3056)
 
-[node name="Pallet_Small_Decorated_A2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("9_q48ew")]
+[node name="Pallet_Small_Decorated_A2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=381061226 instance=ExtResource("9_q48ew")]
 transform = Transform3D(0.969825, 0, -0.243801, 0, 1, 0, 0.243801, 0, 0.969825, -7.97981, 0.529999, 49.9499)
 
-[node name="Pallet_Small_Decorated_A3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("9_q48ew")]
+[node name="Pallet_Small_Decorated_A3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1989183441 instance=ExtResource("9_q48ew")]
 transform = Transform3D(0.969825, 0, -0.243801, 0, 1, 0, 0.243801, 0, 0.969825, -3.76858, 0.529999, 18.3226)
 
-[node name="Workbench2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("24_bi6o1")]
+[node name="Workbench2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1416153600 instance=ExtResource("24_bi6o1")]
 transform = Transform3D(0, 0, -0.999999, 0, 1, 0, 0.999999, 0, 0, -14.814, 0.529999, 49.7564)
 
-[node name="target_stand_A_Decorated2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("34_6gqwg")]
+[node name="target_stand_A_Decorated2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=374693116 instance=ExtResource("34_6gqwg")]
 transform = Transform3D(-1.05879, 0, 0.806696, 0, 1.33108, 0, -0.806696, 0, -1.05879, -32.3318, 0.529999, 50.3831)
 
-[node name="Locker_Decorated2" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated2" parent="GridMapBuilding/Room2_StaticObjects" unique_id=13770764 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, -18.5623, 0.5, 55.0867)
 
-[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room2_StaticObjects/Locker_Decorated2/Locker_Decorated" index="0"]
+[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room2_StaticObjects/Locker_Decorated2/Locker_Decorated" parent_id_path=PackedInt32Array(13770764, 946666508) index="0" unique_id=1810930714]
 visible = false
 
-[node name="Locker_Decorated4" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated4" parent="GridMapBuilding/Room2_StaticObjects" unique_id=1834683899 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-0.157176, 0, 0.987571, 0, 1, 0, -0.987571, 0, -0.157176, -17.6774, 0.5, 38.2866)
 
-[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room2_StaticObjects/Locker_Decorated4/Locker_Decorated" index="0"]
+[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room2_StaticObjects/Locker_Decorated4/Locker_Decorated" parent_id_path=PackedInt32Array(1834683899, 946666508) index="0" unique_id=1810930714]
 visible = false
 
-[node name="Locker_Decorated5" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated5" parent="GridMapBuilding/Room2_StaticObjects" unique_id=2089935460 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-0.157176, 0, 0.987571, 0, 1, 0, -0.987571, 0, -0.157176, -16.1488, 0.5, 33.8257)
 
-[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room2_StaticObjects/Locker_Decorated5/Locker_Decorated" index="0"]
+[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room2_StaticObjects/Locker_Decorated5/Locker_Decorated" parent_id_path=PackedInt32Array(2089935460, 946666508) index="0" unique_id=1810930714]
 visible = false
 
-[node name="Locker_Decorated3" parent="GridMapBuilding/Room2_StaticObjects" instance=ExtResource("14_wxdma")]
+[node name="Locker_Decorated3" parent="GridMapBuilding/Room2_StaticObjects" unique_id=758654293 instance=ExtResource("14_wxdma")]
 transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, -22.3655, 0.5, 55.0867)
 
-[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room2_StaticObjects/Locker_Decorated3/Locker_Decorated" index="0"]
+[node name="Cube_Prototype_Large_B_003" parent="GridMapBuilding/Room2_StaticObjects/Locker_Decorated3/Locker_Decorated" parent_id_path=PackedInt32Array(758654293, 946666508) index="0" unique_id=1810930714]
 visible = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=184452434]
 environment = ExtResource("31_78xer")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=805544672]
 transform = Transform3D(0.138435, 0.820941, -0.553978, -0.35771, 0.56305, 0.744996, 0.923515, 0.09503, 0.371605, 0, 26.3786, -5.7794)
 layers = 2
 light_color = Color(0.992157, 0.917647, 0.698039, 1)
@@ -411,7 +422,7 @@ directional_shadow_split_2 = 0.343
 directional_shadow_split_3 = 0.566
 directional_shadow_blend_splits = true
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment"]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1039080870]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 8.74228e-08, 4.37114e-08, -1, 1, -4.37114e-08, 8.74228e-08, 0, 13.9098, -17.1364)
 layers = 2
 light_color = Color(0.303129, 0.18483, 0.0558749, 1)
@@ -422,11 +433,29 @@ shadow_bias = 0.03
 shadow_blur = 0.0
 directional_shadow_mode = 0
 
-[node name="Dummy_Base2" parent="." instance=ExtResource("13_ae10q")]
+[node name="Dummy_Base2" parent="." unique_id=684601050 instance=ExtResource("13_ae10q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26248, 0.0299999, 28.0111)
 
-[node name="PlayerEntity" parent="." instance=ExtResource("33_knj36")]
+[node name="PlayerEntity" parent="." unique_id=957903899 instance=ExtResource("33_knj36")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.62523, 4, -18.7447)
+
+[node name="Enemy_Minion1" parent="." unique_id=356191655 instance=ExtResource("en")]
+transform = Transform3D(-0.6010995, 0, 0.7991742, 0, 1, 0, -0.7991742, 0, -0.6010995, 12, 0.3, 4)
+
+[node name="Enemy_Minion2" parent="." unique_id=519195663 instance=ExtResource("en")]
+transform = Transform3D(-0.8681449, 0, 0.49631074, 0, 1, 0, -0.49631074, 0, -0.8681449, 4, 0.3, 8)
+
+[node name="Enemy_Minion3" parent="." unique_id=1682998176 instance=ExtResource("en")]
+transform = Transform3D(0.28833917, 0, 0.95752835, 0, 1, 0, -0.95752835, 0, 0.28833917, 0, 0.3, 12)
+
+[node name="Enemy_Minion4" parent="." unique_id=346363720 instance=ExtResource("en")]
+transform = Transform3D(-0.1158747, 0, -0.99326384, 0, 1, 0, 0.99326384, 0, -0.1158747, 2, 0.3, 22)
+
+[node name="Enemy_Minion5" parent="." unique_id=916323469 instance=ExtResource("en")]
+transform = Transform3D(0.96164644, 0, 0.2742921, 0, 1, 0, -0.2742921, 0, 0.96164644, -16, 0.3, 46)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2074653989]
+navigation_mesh = SubResource("NavigationMesh_glfrj")
 
 [editable path="GridMapBuilding/Room1_StaticObjects/Locker_Decorated10"]
 [editable path="GridMapBuilding/Room1_StaticObjects/Locker_Decorated4"]

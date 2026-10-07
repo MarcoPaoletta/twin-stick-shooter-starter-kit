@@ -62,7 +62,6 @@ func play_aiming(value: bool) -> void:
 
 func play_shooting(is_requested: bool) -> void:
 	muzzle_vfx.visible = true
-	print("randf: ",  randf_range(-2*PI,2*PI))
 	#muzzle_vfx.rotate(Vector3(1,0,0), randf_range(-2*PI,2*PI))
 	muzzle_vfx.rotation.x = randf_range(-2*PI,2*PI)
 	

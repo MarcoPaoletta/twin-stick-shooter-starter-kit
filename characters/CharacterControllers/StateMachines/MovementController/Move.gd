@@ -45,7 +45,9 @@ func _update_player_input():
 	_player_input = Vector3(input.x, 0, input.y)
 	
 	# align input with the camera 
-	_player_input = player.camera.global_transform.basis * (_player_input)
+	# only the yaw of the camera counts, otherwise a tilted camera skews diagonals
+	var camera_yaw: float = player.camera.global_transform.basis.get_euler().y
+	_player_input = _player_input.rotated(Vector3.UP, camera_yaw)
 	_player_input.y = 0
 	# remove the following if you want character to be slower with how much you push the joystick
 	_player_input = _player_input.normalized()

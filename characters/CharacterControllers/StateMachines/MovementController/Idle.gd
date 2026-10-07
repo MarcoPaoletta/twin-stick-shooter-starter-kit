@@ -9,7 +9,7 @@ func _ready() -> void:
 	add_child(_break_timer)
 	_break_timer.wait_time = IDLE_BREAK_WAIT_TIME
 	_break_timer.one_shot = false
-	await get_tree().root.ready
+	await get_tree().process_frame
 	_break_timer.connect("timeout", Callable(player.model, "play_idle_break").bind(true))
 	
 

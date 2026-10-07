@@ -1,0 +1,50 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://tools/state_machine/StateMachine.gd" id="1_sm"]
+[ext_resource type="Script" path="res://characters/CharacterControllers/MouseKeyboardController.gd" id="2_ctrl"]
+[ext_resource type="Script" path="res://characters/CharacterControllers/StateMachines/MovementController/Move.gd" id="3_move"]
+[ext_resource type="Script" path="res://characters/CharacterControllers/StateMachines/MovementController/Idle.gd" id="4_idle"]
+[ext_resource type="Script" path="res://characters/CharacterControllers/StateMachines/MovementController/Run.gd" id="5_run"]
+[ext_resource type="Script" path="res://characters/CharacterControllers/StateMachines/MovementController/Jump.gd" id="6_jump"]
+[ext_resource type="Script" path="res://characters/CharacterControllers/StateMachines/MovementController/Fall.gd" id="7_fall"]
+[ext_resource type="Script" path="res://characters/CharacterControllers/StateMachines/MouseKeyboard/MouseAim.gd" id="8_aim"]
+[ext_resource type="Script" path="res://characters/CharacterControllers/StateMachines/Dead.gd" id="9_dead"]
+
+[node name="MouseKeyboardController" type="Node"]
+script = ExtResource("2_ctrl")
+
+[node name="MovementController" type="Node" parent="."]
+script = ExtResource("1_sm")
+initial_state = NodePath("Move/Idle")
+
+[node name="Move" type="Node" parent="MovementController"]
+script = ExtResource("3_move")
+
+[node name="Idle" type="Node" parent="MovementController/Move"]
+script = ExtResource("4_idle")
+
+[node name="Run" type="Node" parent="MovementController/Move"]
+script = ExtResource("5_run")
+
+[node name="Jump" type="Node" parent="MovementController/Move"]
+script = ExtResource("6_jump")
+
+[node name="Fall" type="Node" parent="MovementController/Move"]
+script = ExtResource("7_fall")
+
+[node name="Dead" type="Node" parent="MovementController"]
+script = ExtResource("9_dead")
+is_taking_input = true
+
+[node name="AimingController" type="Node" parent="."]
+script = ExtResource("1_sm")
+initial_state = NodePath("Aim")
+
+[node name="Aim" type="Node" parent="AimingController"]
+script = ExtResource("8_aim")
+
+[node name="Dead" type="Node" parent="AimingController"]
+script = ExtResource("9_dead")
+
+[connection signal="enter_state" from="AimingController/Aim" to="MovementController/Move" method="_on_aim_enter_state"]
+[connection signal="exit_state" from="AimingController/Aim" to="MovementController/Move" method="_on_aim_exit_state"]

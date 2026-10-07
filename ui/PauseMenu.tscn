@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd5lrudlpxbay"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://ui/overlay_menu.gd" id="script"]
+[ext_resource type="Script" path="res://ui/pause_menu.gd" id="script"]
 [ext_resource type="Theme" path="res://ui/theme/game_theme.tres" id="theme"]
+[ext_resource type="Resource" uid="uid://cvgmkxk86tr45" path="res://ui/game_data_store.tres" id="store"]
 
-[node name="GameOverMenu" type="Control"]
+[node name="PauseMenu" type="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +14,7 @@ grow_vertical = 2
 theme = ExtResource("theme")
 mouse_filter = 0
 script = ExtResource("script")
+game_data = ExtResource("store")
 
 [node name="Dim" type="ColorRect" parent="."]
 layout_mode = 1
@@ -22,7 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
-color = Color(0.16, 0.01, 0.02, 0.82)
+color = Color(0.02, 0.03, 0.06, 0.78)
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -44,23 +46,37 @@ theme_override_constants/separation = 14
 [node name="Eyebrow" type="Label" parent="Center/Panel/Box"]
 layout_mode = 2
 theme_type_variation = &"EyebrowLabel"
-text = "GAME OVER"
+text = "TAKE A BREATH"
 horizontal_alignment = 1
 
 [node name="Title" type="Label" parent="Center/Panel/Box"]
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
 theme_override_font_sizes/font_size = 64
-text = "YOU DIED"
+text = "PAUSED"
 horizontal_alignment = 1
-theme_override_colors/font_color = Color(1, 0.3, 0.27, 1)
 
 [node name="Subtitle" type="Label" parent="Center/Panel/Box"]
 layout_mode = 2
 theme_type_variation = &"MutedLabel"
-text = "The minions got you. Shake it off and give it another go."
+text = "Esc resumes. Pick another control scheme below if you want to play with a gamepad."
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="SchemeRow" type="VBoxContainer" parent="Center/Panel/Box"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SchemeLabel" type="Label" parent="Center/Panel/Box/SchemeRow"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Controls"
+
+[node name="SchemeOption" type="OptionButton" parent="Center/Panel/Box/SchemeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="Separator" type="HSeparator" parent="Center/Panel/Box"]
 layout_mode = 2
@@ -69,13 +85,20 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="ResumeButton" type="Button" parent="Center/Panel/Box/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Resume"
+theme_type_variation = &"AccentButton"
+
 [node name="RestartButton" type="Button" parent="Center/Panel/Box/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Try again"
-theme_type_variation = &"AccentButton"
+text = "Restart level"
 
 [node name="MenuButton" type="Button" parent="Center/Panel/Box/Buttons"]
 unique_name_in_owner = true
@@ -91,6 +114,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Quit game"
 
+[connection signal="pressed" from="Center/Panel/Box/Buttons/ResumeButton" to="." method="_on_action" binds= [&"resume"]]
 [connection signal="pressed" from="Center/Panel/Box/Buttons/RestartButton" to="." method="_on_action" binds= [&"restart"]]
 [connection signal="pressed" from="Center/Panel/Box/Buttons/MenuButton" to="." method="_on_action" binds= [&"menu"]]
 [connection signal="pressed" from="Center/Panel/Box/Buttons/QuitButton" to="." method="_on_action" binds= [&"quit"]]

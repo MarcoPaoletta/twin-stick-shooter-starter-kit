@@ -14,9 +14,10 @@ func _init() -> void:
 	DebugStats.add_property(self, "state:name", "")
 
 func _ready() -> void:
-	print("State Machine ", self.name, " is waiting for root ", get_tree().root)
-	await get_tree().root.ready
-	print("Root is ready!")
+	# Wait for the whole scene to finish its _ready so the states can reach the player.
+	# (`root.ready` only fires once at startup: it would never fire for a level that is
+	# loaded later from the menu or reloaded after a restart.)
+	await get_tree().process_frame
 	state.enter()
 
 func _unhandled_input(event: InputEvent) -> void:

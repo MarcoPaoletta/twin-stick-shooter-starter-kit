@@ -24,6 +24,9 @@ var is_target_aligned = false
 var detection_range = null
 
 signal target_reached
+signal died
+
+var is_dead := false
 
 func _ready() -> void:
 	self.navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
@@ -81,6 +84,10 @@ func move_to_idling() -> void:
 
 
 func move_to_dying() -> void:
+	if is_dead:
+		return
+	is_dead = true
+	died.emit()
 	transition.xfade_time = 0
 	anim_tree["parameters/state/transition_request"] = "Dying"
 	self.process_mode = Node.PROCESS_MODE_DISABLED

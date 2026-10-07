@@ -3,11 +3,12 @@ extends CharacterBody3D
 
 @onready var camera := $CameraPivot/ThirdPersonCamera
 @onready var camera_pivot := $CameraPivot
+@onready var camera_rig := $CameraPivot as CameraRig
 @onready var model := $IcySkin
 @onready var health_manager := $HealthManager
 @onready var anim_tree := $IcySkin/AnimationTree
 @onready var shoot_anchor := $IcySkin/%ShootAnchor
-@onready var current_controller := $TwoStickControllerAuto
+@onready var current_controller := $MouseKeyboardController
 @onready var start_position := global_transform.origin
 
 @export var controller_schemes:Array[PackedScene]
@@ -29,6 +30,7 @@ func on_hit():
 
 func on_death():
 	is_dead.emit()
+	camera_rig.on_player_died()
 	model.move_to_dead()
 	#current_controller.process_mode = Node.PROCESS_MODE_DISABLED
 	current_controller.on_death()

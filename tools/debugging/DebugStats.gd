@@ -84,4 +84,3 @@ func remove_property(object, property):
 
 func toggle_visibility():
 	$VBoxContainer.visible = not $VBoxContainer.visible
-	$ShowShortcut.visible = not $ShowShortcut.visible
