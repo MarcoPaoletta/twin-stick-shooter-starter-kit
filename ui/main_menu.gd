@@ -21,7 +21,7 @@ func _ready() -> void:
 	_play_button.pressed.connect(Game.start_game)
 	_levels_button.pressed.connect(_show_panel.bind(_levels_panel))
 	_quit_button.pressed.connect(Game.quit)
-	_quit_button.visible = not OS.has_feature("web")
+	_quit_button.visible = Game.can_quit()
 	_levels_panel.visible = true
 	_right_column.visible = false
 	_play_button.grab_focus()

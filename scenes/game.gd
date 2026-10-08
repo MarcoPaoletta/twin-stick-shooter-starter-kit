@@ -23,12 +23,20 @@ const CONTROLS: Array = [
 ]
 const FADE_TIME := 0.3
 
+## Tweak this resource in the inspector (touch controls on/off/auto, UI scale, look speed).
+var settings: GameSettings = preload("res://scenes/game_settings.tres")
+
 var _fade_rect: ColorRect
 var _busy := false
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	if touch_enabled():
+		# A tap is also delivered as an emulated left click: keep it from shooting.
+		for event in InputMap.action_get_events(&"p1_shoot"):
+			if event is InputEventMouseButton:
+				InputMap.action_erase_event(&"p1_shoot", event)
 	var layer := CanvasLayer.new()
 	layer.layer = 128
 	add_child(layer)
@@ -37,6 +45,34 @@ func _ready() -> void:
 	_fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_fade_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	layer.add_child(_fade_rect)
+
+
+## True when the on-screen joystick and buttons are used (see GameSettings.touch_controls).
+func touch_enabled() -> bool:
+	match settings.touch_controls:
+		GameSettings.TouchMode.ALWAYS_ON:
+			return true
+		GameSettings.TouchMode.ALWAYS_OFF:
+			return false
+	return OS.has_feature("mobile")
+
+
+## Quitting from inside a game is discouraged on iOS.
+func can_quit() -> bool:
+	return not (OS.has_feature("ios") or OS.has_feature("web"))
+
+
+## Notch / home-indicator insets in UI units: Vector4(left, top, right, bottom).
+func safe_margins() -> Vector4:
+	if not OS.has_feature("mobile"):
+		return Vector4.ZERO
+	var window := Vector2(DisplayServer.window_get_size())
+	var safe := DisplayServer.get_display_safe_area()
+	if window.x <= 0.0 or safe.size.x <= 0:
+		return Vector4.ZERO
+	var ratio := get_viewport().get_visible_rect().size / window
+	return Vector4(safe.position.x * ratio.x, safe.position.y * ratio.y,
+			(window.x - safe.end.x) * ratio.x, (window.y - safe.end.y) * ratio.y)
 
 
 func start_game() -> void:

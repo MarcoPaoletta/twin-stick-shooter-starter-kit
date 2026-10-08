@@ -119,7 +119,18 @@ func release_mouse(by: Node) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
+## Look input from a touch drag (already in screen pixels).
+func look_input(screen_delta: Vector2) -> void:
+	if not mouse_enabled or get_tree().paused:
+		return
+	_look(screen_delta * mouse_sensitivity)
+	if _viewmodel:
+		_viewmodel.add_look(screen_delta)
+
+
 func capture_mouse() -> void:
+	if Game.touch_enabled():
+		return
 	if mouse_enabled and not get_tree().paused:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -155,6 +166,8 @@ func is_first_person_active() -> bool:
 
 
 func can_shoot() -> bool:
+	if Game.touch_enabled():
+		return mouse_enabled
 	return mouse_enabled and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 
 

@@ -38,6 +38,7 @@ window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/handheld/orientation=4
 
 [editor_plugins]
 
@@ -217,7 +218,12 @@ camera_zoom_out={
 
 [input_devices]
 
-virtual_controller/ios/enable_controller=true
+virtual_controller/ios/enable_left_thumbstick=false
+virtual_controller/ios/enable_right_thumbstick=false
+virtual_controller/ios/enable_button_a=false
+virtual_controller/ios/enable_button_b=false
+virtual_controller/ios/enable_button_x=false
+virtual_controller/ios/enable_button_y=false
 pointing/emulate_touch_from_mouse=true
 
 [layer_names]
@@ -236,7 +242,6 @@ common/enable_pause_aware_picking=true
 
 rendering_device/driver="metal"
 renderer/rendering_method="forward_plus"
-renderer/rendering_method.mobile="forward_plus"
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
 global_illumination/voxel_gi/quality=1
@@ -267,6 +272,7 @@ fade_enabled={
 
 project/editorState=[{
 "column": 0,
+"current": true,
 "line": 0,
 "path": "res://tools/debugging/DebugStats.gd",
 "transient": true,

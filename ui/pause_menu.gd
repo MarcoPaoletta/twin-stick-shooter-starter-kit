@@ -19,6 +19,8 @@ func _ready() -> void:
 		_scheme_option.add_item(scheme_name)
 	_scheme_option.select(game_data.controller_scheme)
 	_scheme_option.item_selected.connect(_on_scheme_selected)
+	# Touch devices use the on-screen controls, there is no scheme to pick.
+	%SchemeRow.visible = not Game.touch_enabled()
 
 
 func open() -> void:

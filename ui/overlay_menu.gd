@@ -17,6 +17,9 @@ var _tween: Tween
 func _ready() -> void:
 	visible = false
 	modulate.a = 0.0
+	var quit_button := get_node_or_null("%QuitButton") as Control
+	if quit_button:
+		quit_button.visible = Game.can_quit()
 	if focus_on_open == null:
 		var buttons := get_node_or_null("Center/Panel/Box/Buttons")
 		if buttons and buttons.get_child_count() > 0:

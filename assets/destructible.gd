@@ -9,18 +9,6 @@ func _ready():
 		body.body_entered.connect(self._on_frozen_body_entered)
 
 
-func _input(event):
-	# Use for test purposes
-	if event.is_action_pressed("p1_jump"):
-		healt_points -= 1
-		run_animation()
-		print("health: ", healt_points)
-		if healt_points < 0:
-			print("dead!")
-			queue_free()
-			run_explosion()
-
-
 func run_animation():
 	if current_tween != null and current_tween.is_running():
 		current_tween.kill()

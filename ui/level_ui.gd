@@ -15,7 +15,15 @@ var state := State.PLAYING
 @onready var _hint: Control = %Hint
 
 
+var _touch: TouchOverlay
+
+
 func _ready() -> void:
+	if Game.touch_enabled():
+		_touch = TouchOverlay.new()
+		_touch.name = "TouchControls"
+		$Hud.add_child(_touch)
+		_hint.hide()
 	for menu: OverlayMenu in [_pause_menu, _game_over_menu, _complete_menu]:
 		menu.action_requested.connect(_on_action)
 
@@ -52,6 +60,8 @@ func pause() -> void:
 	get_tree().paused = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_hint.hide()
+	if _touch:
+		_touch.set_active(false)
 	Audio.set_music_ducked(true)
 	_pause_menu.open()
 
@@ -59,7 +69,9 @@ func pause() -> void:
 func resume() -> void:
 	state = State.PLAYING
 	get_tree().paused = false
-	_hint.show()
+	_hint.visible = _touch == null
+	if _touch:
+		_touch.set_active(true)
 	Audio.set_music_ducked(false)
 	_pause_menu.close()
 	get_tree().call_group("camera_rig", "capture_mouse")
@@ -70,6 +82,8 @@ func show_game_over(delay := 1.4) -> void:
 		return
 	state = State.GAME_OVER
 	_hint.hide()
+	if _touch:
+		_touch.set_active(false)
 	Audio.play(&"lose", -4.0, 0.0)
 	await get_tree().create_timer(delay).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -82,6 +96,8 @@ func show_complete(level_name: String, has_next: bool) -> void:
 		return
 	state = State.COMPLETE
 	_hint.hide()
+	if _touch:
+		_touch.set_active(false)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Audio.play(&"win", -4.0, 0.0)
 	Audio.set_music_ducked(true)

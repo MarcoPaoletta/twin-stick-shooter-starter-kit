@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="GameSettings" format=3 uid="uid://dkbe4tx5ho4dr"]
+
+[ext_resource type="Script" uid="uid://djtisl61i6eee" path="res://scenes/game_settings.gd" id="1_cfipk"]
+
+[resource]
+script = ExtResource("1_cfipk")
