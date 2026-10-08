@@ -25,3 +25,8 @@ mono_crash.*.json
 *~
 *.blend1
 *.tmp
+
+# Private methodology, never published with this project
+/skills/game-dev/
+/skills/godot-game-dev/
+/skills/README.md
