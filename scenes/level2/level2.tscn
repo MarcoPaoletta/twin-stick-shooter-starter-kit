@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/PlayerEntity.tscn" id="33_knj36"]
 [ext_resource type="PackedScene" uid="uid://cyg3765gfh25q" path="res://assets/prototype_bits/target_stand_A_Decorated.gltf" id="34_6gqwg"]
 [ext_resource type="PackedScene" uid="uid://b4pnyn61mwgsh" path="res://assets/prototype_bits/target.gltf" id="35_e6ad7"]
+[ext_resource type="PackedScene" uid="uid://bl0lypecsl2d2" path="res://scenes/sky/SkyBackdrop.tscn" id="35_k511w"]
 [ext_resource type="PackedScene" uid="uid://dyssgs4g0elmf" path="res://enemies/melee/minion/EnemyMinion.tscn" id="en"]
 [ext_resource type="Script" uid="uid://ijrpu1bsamse" path="res://scenes/level_manager.gd" id="lm"]
 
@@ -456,6 +457,8 @@ transform = Transform3D(0.96164644, 0, 0.2742921, 0, 1, 0, -0.2742921, 0, 0.9616
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2074653989]
 navigation_mesh = SubResource("NavigationMesh_glfrj")
+
+[node name="SkyBackdrop" parent="." unique_id=1226167628 instance=ExtResource("35_k511w")]
 
 [editable path="GridMapBuilding/Room1_StaticObjects/Locker_Decorated10"]
 [editable path="GridMapBuilding/Room1_StaticObjects/Locker_Decorated4"]

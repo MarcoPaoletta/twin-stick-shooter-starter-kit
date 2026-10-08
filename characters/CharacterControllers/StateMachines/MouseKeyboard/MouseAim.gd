@@ -6,7 +6,7 @@ const ARROW := preload("res://objects/Arrow.tscn")
 ## world (2) + objects (8) + enemies (16)
 const AIM_RAY_MASK := 2 | 8 | 16
 const AIM_RANGE := 150.0
-const ARROW_SPEED := 40.0
+const ARROW_SPEED := 90.0
 
 @export var fire_interval := 0.16
 
@@ -38,7 +38,7 @@ func _shoot(rig: CameraRig) -> void:
 		# Start next to the eye and converge on whatever the crosshair points at.
 		var eye := rig.get_eye_position()
 		var look := rig.get_aim_direction()
-		origin = eye + rig.get_aim_basis() * Vector3(0.3, -0.22, -0.8)
+		origin = rig.get_muzzle_position()
 		direction = (_find_aim_point(eye, look) - origin).normalized()
 	else:
 		origin = player.shoot_anchor.global_position
@@ -46,15 +46,17 @@ func _shoot(rig: CameraRig) -> void:
 
 	var arrow: Arrow = ARROW.instantiate()
 	arrow.initial_velocity = ARROW_SPEED
-	# Straight shots, so the arrow lands where the crosshair points.
-	arrow.gravity_scale = 0.0
-	arrow.continuous_cd = true
 	get_tree().current_scene.add_child(arrow)
 	arrow.add_collision_exception_with(player)
 	arrow.global_transform = Transform3D(Basis.looking_at(-direction, Vector3.UP), origin)
 	arrow.apply_central_impulse(direction * arrow.initial_velocity)
-	player.model.play_shooting(true)
+	# The third-person muzzle flash sits on the character model, so it only plays there;
+	# in first person the viewmodel shows its own flash at the barrel.
+	if not rig.is_first_person_active():
+		player.model.play_shooting(true)
 	get_tree().call_group("crosshair", "kick")
+	Audio.play(&"shot", -5.0)
+	get_tree().call_group("viewmodel", "kick")
 
 
 func _find_aim_point(from: Vector3, direction: Vector3) -> Vector3:

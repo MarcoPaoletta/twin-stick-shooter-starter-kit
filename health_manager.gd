@@ -6,8 +6,10 @@ signal health_depleted
 signal health_replenished
 
 @export var ui_hearts: Array[TextureRect]
-@export var max_health: int = 10
-@export var start_health: int = 4
+## Health is tripled compared to the original kit (was 10 max / 4 start).
+## The five hearts always represent the whole bar.
+@export var max_health: int = 30
+@export var start_health: int = 12
 
 var heart_full = preload("res://objects/heart_full.png")
 var heart_empty = preload("res://objects/heart_null.png")
@@ -28,10 +30,12 @@ func set_health(value:int):
 		health_replenished.emit()
 
 func update_ui_hearts(value):
+	var per_heart := float(max_health) / maxi(ui_hearts.size(), 1)
 	for i in len(ui_hearts):
-		if value > i * 2 + 1:
+		var filled: float = (value - i * per_heart) / per_heart
+		if filled >= 0.75:
 			ui_hearts[i].texture = heart_full
-		elif value > i * 2:
+		elif filled > 0.0:
 			ui_hearts[i].texture = heart_half
 		else:
 			ui_hearts[i].texture = heart_empty

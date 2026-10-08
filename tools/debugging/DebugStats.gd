@@ -50,7 +50,12 @@ func _input(event):
 func _process(_delta):
 	if not visible:
 		return
-	for prop in props:
+	for prop in props.duplicate():
+		if not is_instance_valid(prop.object):
+			# the tracked node was freed without ever entering the tree
+			prop.label_ref.queue_free()
+			props.erase(prop)
+			continue
 		prop.set_label()
 
 

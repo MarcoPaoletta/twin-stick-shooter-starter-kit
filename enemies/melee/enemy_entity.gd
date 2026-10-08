@@ -17,7 +17,7 @@ var _last_strong_direction := Vector3.FORWARD
 var gravity = -30.0
 var anim_state = null
 var current_state = null
-var health_points = 3
+@export var health_points := 3
 var is_target_detected = false
 var is_target_in_reach = false
 var is_target_aligned = false
@@ -88,6 +88,7 @@ func move_to_dying() -> void:
 		return
 	is_dead = true
 	died.emit()
+	Audio.play_at(&"enemy_die", global_position, -2.0)
 	transition.xfade_time = 0
 	anim_tree["parameters/state/transition_request"] = "Dying"
 	self.process_mode = Node.PROCESS_MODE_DISABLED
@@ -169,3 +170,4 @@ func _on_hit_area_body_entered(colliding_body):
 		health_points -= 1
 		colliding_body.remove_from_group("bullet")
 		play_on_hit(true)
+		Audio.play_at(&"enemy_hit", global_position, -2.0)

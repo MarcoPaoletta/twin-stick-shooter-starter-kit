@@ -52,6 +52,7 @@ func pause() -> void:
 	get_tree().paused = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_hint.hide()
+	Audio.set_music_ducked(true)
 	_pause_menu.open()
 
 
@@ -59,6 +60,7 @@ func resume() -> void:
 	state = State.PLAYING
 	get_tree().paused = false
 	_hint.show()
+	Audio.set_music_ducked(false)
 	_pause_menu.close()
 	get_tree().call_group("camera_rig", "capture_mouse")
 
@@ -68,8 +70,10 @@ func show_game_over(delay := 1.4) -> void:
 		return
 	state = State.GAME_OVER
 	_hint.hide()
+	Audio.play(&"lose", -4.0, 0.0)
 	await get_tree().create_timer(delay).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Audio.set_music_ducked(true)
 	_game_over_menu.open()
 
 
@@ -79,6 +83,8 @@ func show_complete(level_name: String, has_next: bool) -> void:
 	state = State.COMPLETE
 	_hint.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Audio.play(&"win", -4.0, 0.0)
+	Audio.set_music_ducked(true)
 	_complete_menu.set_level(level_name, has_next)
 	_complete_menu.open()
 

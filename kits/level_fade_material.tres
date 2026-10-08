@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dbebnw0ppnsv1"]
+
+[ext_resource type="Shader" uid="uid://dv6a8ksugjkp7" path="res://scenes/fade.gdshader" id="1_wt7qe"]
+[ext_resource type="Texture2D" uid="uid://cfp20n7ciw0vs" path="res://kits/kaykit_prototype_bits_prototypebits_texture.png" id="2_hn7ka"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wt7qe")
+shader_parameter/albedo_tex = ExtResource("2_hn7ka")
+shader_parameter/roughness_value = 0.4
+shader_parameter/inner_radius = 1.8
+shader_parameter/outer_radius = 3.4
+shader_parameter/keep_near_target = 1.8

@@ -26,6 +26,7 @@ func _ready():
 
 func on_hit():
 	model.play_on_hit(true)
+	Audio.play(&"player_hurt", -3.0)
 
 
 func on_death():

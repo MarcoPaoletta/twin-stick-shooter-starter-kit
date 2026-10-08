@@ -15,6 +15,7 @@ var _enemies_alive := 0
 
 
 func _ready() -> void:
+	Audio.play_music(&"hard" if Game.current_level_index() >= 3 else &"level")
 	_ui = LEVEL_UI.instantiate()
 	add_child(_ui)
 

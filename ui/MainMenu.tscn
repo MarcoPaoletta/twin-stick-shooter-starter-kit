@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="script"]
+[ext_resource type="Texture2D" path="res://ui/menu/menu_shade.tres" id="shade"]
 [ext_resource type="Theme" path="res://ui/theme/game_theme.tres" id="theme"]
 
 [sub_resource type="Gradient" id="grad"]
@@ -30,7 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = SubResource("gradtex")
+texture = ExtResource("shade")
 expand_mode = 1
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -93,14 +94,6 @@ size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
 text = "Select level"
 
-[node name="ControlsButton" type="Button" parent="Margin/Columns/LeftColumn"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(380, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-mouse_default_cursor_shape = 2
-text = "Controls"
-
 [node name="QuitButton" type="Button" parent="Margin/Columns/LeftColumn"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(380, 64)
@@ -120,21 +113,6 @@ layout_mode = 2
 
 [node name="InfoBox" type="VBoxContainer" parent="Margin/Columns/RightColumn/InfoPanel"]
 layout_mode = 2
-
-[node name="ControlsList" type="VBoxContainer" parent="Margin/Columns/RightColumn/InfoPanel/InfoBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="Heading" type="Label" parent="Margin/Columns/RightColumn/InfoPanel/InfoBox/ControlsList"]
-layout_mode = 2
-theme_type_variation = &"EyebrowLabel"
-text = "CONTROLS"
-
-[node name="ControlRows" type="VBoxContainer" parent="Margin/Columns/RightColumn/InfoPanel/InfoBox/ControlsList"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 12
 
 [node name="LevelsList" type="VBoxContainer" parent="Margin/Columns/RightColumn/InfoPanel/InfoBox"]
 unique_name_in_owner = true

@@ -6,9 +6,11 @@ const MAIN_MENU := "res://ui/MainMenu.tscn"
 const LEVELS: Array[String] = [
 	"res://scenes/level1/level1.tscn",
 	"res://scenes/level2/level2.tscn",
-	"res://scenes/test_AI.tscn",
+	"res://scenes/level3/level3.tscn",
+	"res://scenes/level4/level4.tscn",
+	"res://scenes/level5/level5.tscn",
 ]
-const LEVEL_TITLES: Array[String] = ["Shooting Range", "Warehouse", "Arena"]
+const LEVEL_TITLES: Array[String] = ["Shooting Range", "Warehouse", "Barracks", "Foundry", "Citadel"]
 ## [keys, action] pairs shown in the main menu and the pause menu.
 const CONTROLS: Array = [
 	["W A S D", "Move"],

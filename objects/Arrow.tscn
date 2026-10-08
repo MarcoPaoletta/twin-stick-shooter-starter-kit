@@ -5,13 +5,13 @@
 [ext_resource type="Material" uid="uid://8x5le7e5jdm1" path="res://objects/impact-material.tres" id="3_bs5t2"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
-radius = 0.15
-height = 1.5
+radius = 0.07
+height = 0.5
 
 [sub_resource type="CapsuleMesh" id="2"]
 material = ExtResource("2")
 radius = 0.15
-height = 1.5
+height = 2.4
 
 [sub_resource type="CylinderMesh" id="3"]
 material = ExtResource("2")

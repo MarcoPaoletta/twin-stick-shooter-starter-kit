@@ -10,6 +10,7 @@ func physics_process(delta: float) -> void:
 func enter(msg: = {}) -> void:
 	_parent.velocity.y = jump_initial_impulse
 	player.model.move_to_jumping()
+	Audio.play(&"jump", -8.0)
 	_parent.enter(msg)
 
 

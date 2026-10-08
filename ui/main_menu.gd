@@ -1,13 +1,10 @@
 extends Control
-## Title screen: play, level select, controls overview and quit.
+## Title screen: play, level select and quit.
 
 @onready var _play_button: Button = %PlayButton
 @onready var _levels_button: Button = %LevelsButton
-@onready var _controls_button: Button = %ControlsButton
 @onready var _quit_button: Button = %QuitButton
-@onready var _controls_panel: Control = %ControlsList
 @onready var _levels_panel: Control = %LevelsList
-@onready var _control_rows: VBoxContainer = %ControlRows
 @onready var _level_rows: VBoxContainer = %LevelRows
 @onready var _left_column: Control = %LeftColumn
 @onready var _right_column: Control = %RightColumn
@@ -15,31 +12,20 @@ extends Control
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	_build_controls()
+	Audio.play_music(&"menu")
+	var world := Node3D.new()
+	world.set_script(load("res://ui/menu/menu_world.gd"))
+	add_child(world)
+	move_child(world, 0)
 	_build_levels()
 	_play_button.pressed.connect(Game.start_game)
 	_levels_button.pressed.connect(_show_panel.bind(_levels_panel))
-	_controls_button.pressed.connect(_show_panel.bind(_controls_panel))
 	_quit_button.pressed.connect(Game.quit)
 	_quit_button.visible = not OS.has_feature("web")
-	_show_panel(_controls_panel)
+	_levels_panel.visible = true
+	_right_column.visible = false
 	_play_button.grab_focus()
 	_animate_in()
-
-
-func _build_controls() -> void:
-	for entry: Array in Game.CONTROLS:
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 24)
-		var keys := Label.new()
-		keys.theme_type_variation = &"KeyLabel"
-		keys.text = entry[0]
-		keys.custom_minimum_size.x = 210
-		var action := Label.new()
-		action.text = entry[1]
-		row.add_child(keys)
-		row.add_child(action)
-		_control_rows.add_child(row)
 
 
 func _build_levels() -> void:
@@ -52,9 +38,8 @@ func _build_levels() -> void:
 		_level_rows.add_child(button)
 
 
-func _show_panel(panel: Control) -> void:
-	_controls_panel.visible = panel == _controls_panel
-	_levels_panel.visible = panel == _levels_panel
+func _show_panel(_panel: Control) -> void:
+	_right_column.visible = not _right_column.visible
 
 
 func _animate_in() -> void:

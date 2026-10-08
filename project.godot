@@ -27,6 +27,7 @@ DebugOverlay="*res://tools/debugging/DebugOverlay.tscn"
 BeehaveGlobalMetrics="*uid://dt67a6ly328mj"
 BeehaveGlobalDebugger="*uid://7wn3rhjjno4j"
 Game="*res://scenes/game.gd"
+Audio="*res://scenes/audio.gd"
 
 [display]
 
@@ -238,21 +239,36 @@ renderer/rendering_method="forward_plus"
 renderer/rendering_method.mobile="forward_plus"
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
-lights_and_shadows/directional_shadow/soft_shadow_filter_quality=5
 global_illumination/voxel_gi/quality=1
-environment/ssao/quality=4
-environment/ssil/quality=4
-anti_aliasing/quality/msaa_3d=3
+environment/ssao/quality=1
+environment/ssil/quality=0
+anti_aliasing/quality/msaa_3d=1
 global_illumination/sdfgi/probe_ray_count=3
+environment/defaults/default_clear_color=Color(0.74, 0.89, 1, 1)
 environment/defaults/default_environment="res://scenes/default_env.tres"
 vram_compression/import_etc=true
+
+[shader_globals]
+
+fade_cam_pos={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}
+fade_target_pos={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}
+fade_enabled={
+"type": "float",
+"value": 0.0
+}
 
 [xogot]
 
 project/editorState=[{
 "column": 0,
 "line": 0,
-"path": "gdscript://-9223371991975721226.gd",
+"path": "res://tools/debugging/DebugStats.gd",
 "transient": true,
 "type": "file"
 }]

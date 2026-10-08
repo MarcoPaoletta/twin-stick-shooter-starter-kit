@@ -6,9 +6,11 @@ extends Node3D
 
 signal view_changed(first_person: bool)
 
-const THIRD_PERSON_PITCH_MIN := deg_to_rad(-80.0)
-const THIRD_PERSON_PITCH_MAX := deg_to_rad(-20.0)
-const FIRST_PERSON_PITCH_LIMIT := deg_to_rad(85.0)
+# From straight above (-89) down to nearly eye level (-3): the whole vertical range
+# the orbit can use without the camera dipping under the floor.
+const THIRD_PERSON_PITCH_MIN := deg_to_rad(-89.0)
+const THIRD_PERSON_PITCH_MAX := deg_to_rad(-3.0)
+const FIRST_PERSON_PITCH_LIMIT := deg_to_rad(89.0)
 const ZOOM_STEP := 0.88
 const FOV_STEP := 6.0
 
@@ -19,7 +21,7 @@ const FOV_STEP := 6.0
 
 @export_group("Third person")
 @export var default_distance := 42.5
-@export var min_distance := 8.0
+@export var min_distance := 5.0
 @export var max_distance := 80.0
 @export_range(-89.0, -5.0, 0.5, "degrees") var default_pitch_deg := -30.0
 @export_range(10.0, 90.0, 0.1) var third_person_fov := 30.9
@@ -50,6 +52,8 @@ var _tween: Tween
 @onready var _head: Node3D = get_node_or_null("../HeadAnchor")
 @onready var _crosshair: CanvasItem = get_node_or_null("../Crosshair")
 @onready var _body: Node3D = get_node_or_null("../IcySkin/Armature/Skeleton3D/body")
+@onready var _skin_gun: Node3D = get_node_or_null("../IcySkin/Armature/Skeleton3D/BoneAttachment3D")
+var _viewmodel: Viewmodel
 
 
 func _ready() -> void:
@@ -62,6 +66,10 @@ func _ready() -> void:
 	_fov_target = first_person_fov
 	camera.top_level = true
 	camera.current = true
+	_viewmodel = Viewmodel.new()
+	_viewmodel.name = "Viewmodel"
+	camera.add_child(_viewmodel)
+	_viewmodel.owner = null
 	if mouse_enabled:
 		capture_mouse()
 	_update_camera(0.0)
@@ -72,6 +80,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		_look(event.screen_relative * mouse_sensitivity)
+		if _viewmodel:
+			_viewmodel.add_look(event.screen_relative)
 	elif event is InputEventMouseButton and event.pressed and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		# Clicking the window gives the mouse back to the camera (after alt-tab, for example).
 		capture_mouse()
@@ -122,6 +132,7 @@ func set_first_person(value: bool) -> void:
 	if value == first_person:
 		return
 	first_person = value
+	Audio.play(&"whoosh", -10.0, 0.05)
 	if value:
 		_first_person_pitch = 0.0
 	if _tween:
@@ -183,6 +194,23 @@ func _zoom(direction: int) -> void:
 		_distance_target = clampf(_distance_target * pow(1.0 / ZOOM_STEP, direction), min_distance, max_distance)
 
 
+## Tells the level material which walls stand between the camera and the player.
+func _update_wall_fade() -> void:
+	RenderingServer.global_shader_parameter_set("fade_cam_pos", camera.global_position)
+	RenderingServer.global_shader_parameter_set("fade_target_pos", global_position + Vector3.UP * 1.1)
+	RenderingServer.global_shader_parameter_set("fade_enabled", 1.0 - smoothstep(0.0, 0.5, view_blend))
+
+
+func get_muzzle_position() -> Vector3:
+	if _viewmodel and _viewmodel.muzzle:
+		return _viewmodel.muzzle.global_position
+	return get_eye_position()
+
+
+func _exit_tree() -> void:
+	RenderingServer.global_shader_parameter_set("fade_enabled", 0.0)
+
+
 func _update_camera(delta: float) -> void:
 	var smoothing := 1.0 - exp(-12.0 * delta)
 	_distance = lerpf(_distance, _distance_target, smoothing)
@@ -200,6 +228,14 @@ func _update_camera(delta: float) -> void:
 
 	if _body:
 		_body.visible = view_blend < 0.96
+	if _skin_gun:
+		_skin_gun.visible = view_blend < 0.96
+	if _viewmodel:
+		_viewmodel.visible = view_blend > 0.96
+	# A tight near/far range keeps depth precision high, which avoids z-fighting.
+	camera.near = lerpf(0.5, 0.05, view_blend)
+	camera.far = 700.0
+	_update_wall_fade()
 	if _crosshair:
 		var alpha := clampf((view_blend - 0.6) / 0.4, 0.0, 1.0)
 		_crosshair.modulate.a = alpha
